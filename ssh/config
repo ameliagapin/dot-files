@@ -8,3 +8,5 @@ Host jump02.ec2.bitly.net
   ForwardAgent yes
 Host jump01.dc4.bitly.net
   ForwardAgent yes
+Host *.bitly.net
+  ForwardAgent yes

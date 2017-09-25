@@ -51,10 +51,12 @@ alias gcmp="git checkout master && git pull"
 # Bitly                                                                       #
 ###############################################################################
 
-alias dev="cd ~/Projects/devvm"
-alias bitly="cd /bitly"
+alias dev="cd ~/Projects/bitly"
+alias bitly='cd /bitly/src/github.com/bitly/bitly'
 alias data="cd /data"
 alias mountall="sudo mount /bitly && sudo mount /data"
+alias flush_mc='echo '\''flush_all'\'' | nc localhost 11211'
+alias fix_time='ntpdate -s time.nist.gov'
 
 ###############################################################################
 # Other shit                                                                  #

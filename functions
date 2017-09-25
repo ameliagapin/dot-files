@@ -235,3 +235,18 @@ function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
+##################################################
+#
+# BITLY
+#
+##################################################
+
+function rb() {
+    local account="$(git config --get gitOpenPull.baseAccount)"
+    git fetch $account || return
+    git rebase -i ${account}/master || return
+}
+
+function egb() {
+    /bitly/src/github.com/bitly/bitly/export.sh ${1}#gobuild
+}

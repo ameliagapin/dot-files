@@ -23,12 +23,13 @@ Plug 'fatih/vim-go'
 Plug 'severin-lemaignan/vim-minimap'
 Plug 'godlygeek/csapprox'
 Plug 'leafgarland/typescript-vim'
-Plug 'rking/ag.vim'
-Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 " Turn off line wrapping
 set nowrap
+
+" Set noshowmode to hide --INSERT-- from status line
+set noshowmode
 
 " Colorz
 set t_Co=256
@@ -97,7 +98,7 @@ set colorcolumn=100
 
 " Indents, Tabs/Spaces
 set autoindent    " If you're indented, new lines will also be indented
-" set smartindent   " Automatically indents l`ines after opening a bracket in programming languages
+" set smartindent   " Automatically indents lines after opening a bracket in programming languages
 set expandtab     " Inserts spaces when tab is hit
 set tabstop=4     " How much space Vim gives to a tab
 set smarttab      " Improves tabbing
@@ -235,7 +236,7 @@ noremap <C-k> :bprevious<cr>
 " | Use The Silver Searcher                                            |
 " ----------------------------------------------------------------------
 " command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Ag -C <SPACE>
+nnoremap \ :Ag -C<SPACE>
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " ----------------------------------------------------------------------
@@ -320,7 +321,7 @@ let g:airline#extensions#ale#enabled = 1
 nmap <silent> <C-S-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-S-l> <Plug>(ale_next_wrap)
 let g:ale_linters = {
-\   'python': ['pep8'],
+\   'python': ['autopep8'],
 \}
 
 "
@@ -407,7 +408,13 @@ noremap <C-b> :CtrlPBuffer<cr>
 "
 " vimgo
 "
+let g:go_auto_sameids = 1 " Auto higlight all references to symbol under the cursor
+set updatetime=100 " Update status line info every 100ms
+let g:go_auto_type_info = 1 " Automatically show type info in status line for type under cursor
 let g:go_fmt_command = "goimports"
+let g:go_decls_includes = "func,type" " Show funcs and types in declaration list
+nmap <leader>gi :GoInfo<CR>  " Show method signature for a Go method in status line
+nmap <leader>gd :GoDoc<CR>  " Show info for a Go method in scratch area
 
 "
 " YouCompleteMe

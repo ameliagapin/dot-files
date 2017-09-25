@@ -213,6 +213,6 @@ pecho "Done!" 2
 # bash_completion
 # git
 # nvm
-# vim8
+# vim8 / vim-X11
 # mycli
 

@@ -2,7 +2,7 @@
 export PATH="$HOME/bin:$PATH";
 
 # GO
-export GOPATH=$HOME/Projects/go
+export GOPATH="$HOME/Projects/go:/bitly"
 export PATH=$PATH:$(go env GOPATH)/bin
 
 # Add `~/.nvm` to the `$PATH`
@@ -54,3 +54,11 @@ complete -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+
+###############################################################################
+# Bitly                                                                       #
+###############################################################################
+
+if [ -f /root/.bash_github ]; then
+    . /root/.bash_github
+fi

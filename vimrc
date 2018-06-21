@@ -30,6 +30,9 @@ call plug#end()
 " Turn off line wrapping
 set nowrap
 
+" Set noshowmode to hide --INSERT-- from status line
+set noshowmode
+
 " Colorz
 set t_Co=256
 set background=dark
@@ -407,7 +410,13 @@ noremap <C-b> :CtrlPBuffer<cr>
 "
 " vimgo
 "
+let g:go_auto_sameids = 1 " Auto higlight all references to symbol under the cursor
+set updatetime=100 " Update status line info every 100ms
+let g:go_auto_type_info = 1 " Automatically show type info in status line for type under cursor
 let g:go_fmt_command = "goimports"
+let g:go_decls_includes = "func,type" " Show funcs and types in declaration list
+nmap <leader>gi :GoInfo<CR>  " Show method signature for a Go method in status line
+nmap <leader>gd :GoDoc<CR>  " Show info for a Go method in scratch area
 
 "
 " YouCompleteMe

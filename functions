@@ -250,3 +250,16 @@ function rb() {
 function egb() {
     /bitly/src/github.com/bitly/bitly/export.sh ${1}#gobuild
 }
+
+function yorebaseit() {
+    local account="$(git config --get gitOpenPull.baseAccount)"
+    git checkout master || return
+    git fetch $account || return
+    git fetch ameliagapin || return
+    git rebase $account/master || return
+    git push -f ameliagapin master || return
+    git checkout ${1} || return
+    git rebase ameliagapin/${1} || return
+    git rebase $account/master || return
+    git push -f ameliagapin ${1} || return
+}

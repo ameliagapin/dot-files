@@ -30,6 +30,7 @@ git submodule add https://github.com/sobolevn/dotbot-brewfile.git
 git submodule add https://github.com/sobolevn/dotbot-pip.git
 git submodule add https://gitlab.com/flyingchipmunk/dotbot-yum.git
 git submodule add https://github.com/dein0s/dotbot_plugin_aptget.git
+git submodule add https://github.com/ameliagapin/dotbot-npm.git
 
 ###############################################################################
 # Link dotfiles
@@ -158,6 +159,19 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
 fi
 
 ###############################################################################
+# Install npm packages
+###############################################################################
+
+CONFIG="npm.conf.yaml"
+
+pecho "Would you like to install npm packages? [y/N] "
+read -r response ; tput sgr0
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+    echo "Installing npm packages:"
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" --plugin-dir dotbot-npm -c "${CONFIG}" "${@}"
+fi
+
+###############################################################################
 # Install vagrant plugins
 ###############################################################################
 
@@ -214,39 +228,17 @@ fi
 
 pecho "Done!"
 
+###############################################################################
+# TODO
+###############################################################################
 
-
-#      
-#      ###############################################################################
-#      # Install npm packages
-#      ###############################################################################
-#      
-#      npm install -g tldr
-#      npm install -g http-server
-#      npm install -g json-server
-#      express
-#       request
-#       react
-#       debug
-#      
-#      
-#      
-#      ###############################################################################
-#      # Finish
-#      ###############################################################################
-#      pecho "Done!" 2
-#      
-#      ###############################################################################
-#      # TODO
-#      ###############################################################################
-#      
-#      # TODO: Add for linux
-#      # nodejs
-#      # htop
-#      # gtop
-#      # bash_completion
-#      # git
-#      # nvm
-#      # vim8
-#      # mycli
+# TODO: Add for linux
+# nodejs
+# htop
+# gtop
+# bash_completion
+# git
+# nvm
+# vim8
+# mycli
 

@@ -21,6 +21,7 @@
     - python3-devel
     - hugo
     - jq
+    - lnav
     - mysql
     - mycli
     - the_silver_searcher

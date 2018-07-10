@@ -1,0 +1,20 @@
+- npm:
+    - tldr
+    - debug
+    - http-server
+    - json-server
+    - express
+    - react
+    - request
+    - debug
+    - async
+    - moment
+    - redux
+    - winston
+    - botkit
+    - valid-url
+    - microtime
+    - artillery
+    - git-open
+    - internal-ip-cli
+    - public-ip-cli

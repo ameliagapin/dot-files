@@ -49,33 +49,47 @@ fi
 # Install brew + formulae (macOS only)
 ###############################################################################
 
-CONFIG="brew.conf.yaml"
+if [[ "$OSTYPE" =~ ^darwin ]] ; then
+    CONFIG="brew.conf.yaml"
 
-## install homebrew + formulae?
-pecho "Would you like to install Homebrew (http://brew.sh/) + my formulae? [y/N] "
-read -r response ; tput sgr0
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
-    echo "Installing brew and formulae (z, fzf, thefuck, etc...):"
+    ## install homebrew + formulae?
+    pecho "Would you like to install Homebrew (http://brew.sh/) + my formulae? [y/N] "
+    read -r response ; tput sgr0
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
 
-    # brew installed?
-    which -s brew
-    if [[ $? != 0 ]] ; then
-        # install Homebrew
-        echo "Installing brew:"
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    else
-        echo "Brew already installed. Let's make sure your formulae are up to date:"
-        brew update
-        brew upgrade
-    fi
+        pecho "Would you like to install Mac App Store apps [y/N] "
+        read -r response ; tput sgr0
+        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+            # Have to install mas so we can do the signin
+            brew install mas
 
-    # Double check we've installed brew correctly
-    if command -v brew >/dev/null 2>&1 ; then
-      echo "Installing brew formulae:"
+            pecho "What is you iCloud account email address? "
+            read -r response ; tput sgr0
+            mas signin $response
+        fi
 
-      "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" --plugin-dir dotbot-brewfile -c "${CONFIG}" "${@}"
-    else
-        echo "Error installing brew... brew + packages not installed."
+        echo "Installing brew and formulae (z, fzf, thefuck, etc...):"
+
+        # brew installed?
+        which -s brew
+        if [[ $? != 0 ]] ; then
+            # install Homebrew
+            echo "Installing brew:"
+            ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        else
+            echo "Brew already installed. Let's make sure your formulae are up to date:"
+            brew update
+            brew upgrade
+        fi
+
+        # Double check we've installed brew correctly
+        if command -v brew >/dev/null 2>&1 ; then
+          echo "Installing brew formulae:"
+
+          "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" --plugin-dir dotbot-brewfile -c "${CONFIG}" "${@}"
+        else
+            echo "Error installing brew... brew + packages not installed."
+        fi
     fi
 fi
 
@@ -99,28 +113,35 @@ fi
 # Install yum packages
 ###############################################################################
 
-CONFIG="yum.conf.yaml"
+YUM_CMD=$(which yum)
+if [[ ! -z $YUM_CMD ]] ; then
+    CONFIG="yum.conf.yaml"
 
-pecho "Would you like to install yum packages [y/N] "
-read -r response ; tput sgr0
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
-    echo "Installing yum packages:"
+    pecho "Would you like to install yum packages [y/N] "
+    read -r response ; tput sgr0
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+        echo "Installing yum packages:"
 
-    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -p dotbot-yum/yum.py -c "${CONFIG}" "${@}"
+        "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -p dotbot-yum/yum.py -c "${CONFIG}" "${@}"
+    fi
 fi
 
 ###############################################################################
 # Install apt-get packages
 ###############################################################################
 
-CONFIG="aptget.conf.yaml"
+APT_GET_CMD=$(which apt-get)
 
-pecho "Would you like to install apt-get packages [y/N] "
-read -r response ; tput sgr0
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
-    echo "Installing apt-get packages:"
+if [[ ! -z $APT_GET_CMD ]] ; then
+    CONFIG="aptget.conf.yaml"
 
-    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -p dotbot_plugin_aptget/aptget.py -c "${CONFIG}" "${@}"
+    pecho "Would you like to install apt-get packages [y/N] "
+    read -r response ; tput sgr0
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+        echo "Installing apt-get packages:"
+
+        "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -p dotbot_plugin_aptget/aptget.py -c "${CONFIG}" "${@}"
+    fi
 fi
 
 ###############################################################################
@@ -180,14 +201,18 @@ fi
 # Make sure the latest version of bash is being used
 ###############################################################################
 
-sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
-chsh -s /usr/local/bin/bash
+pecho "Would you like to ensure latest version bash [y/N] "
+read -r response ; tput sgr0
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+    sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+    chsh -s /usr/local/bin/bash
+fi
 
 ###############################################################################
 # Finish
 ###############################################################################
 
-pecho "Done!" 2
+pecho "Done!"
 
 
 
@@ -199,13 +224,16 @@ pecho "Done!" 2
 #      npm install -g tldr
 #      npm install -g http-server
 #      npm install -g json-server
+#      express
+#       request
+#       react
+#       debug
 #      
 #      
 #      
 #      ###############################################################################
 #      # Finish
 #      ###############################################################################
-#      
 #      pecho "Done!" 2
 #      
 #      ###############################################################################

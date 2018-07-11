@@ -12,8 +12,6 @@
     ~/.vim: vim
     ~/.vimrc: vimrc
     ~/.functions: functions
-    ~/.macos: macos
-    ~/.osx: osx
     ~/.extra: extra
     ~/.exports: exports
     ~/.bashrc: bashrc

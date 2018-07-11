@@ -95,20 +95,28 @@ if [[ "$OSTYPE" =~ ^darwin ]] ; then
 fi
 
 ###############################################################################
-# Install Mac App Store Apps
+# Set macOS System Prefs
 ###############################################################################
 
-# These are included in the brew bundle install
+if [[ "$OSTYPE" =~ ^darwin ]] ; then
+    pecho "Would you like to set your computer name (as done via System Preferences >> Sharing)?  (y/n)"
+    read -r response ; tput sgr0
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+      pecho "What would you like it to be?"
+      read COMPUTER_NAME
+      sudo scutil --set ComputerName $COMPUTER_NAME
+      sudo scutil --set HostName $COMPUTER_NAME
+      sudo scutil --set LocalHostName $COMPUTER_NAME
+      sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
+    fi
 
-# pecho "Would you like to install Mac App Store apps [y/N] "
-# read -r response ; tput sgr0
-# if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
-#     echo "Installing Mac App Store apps:"
-# 
-#     pecho "What is you iCloud account email address? "
-#     read -r response ; tput sgr0
-#     mas signin $response
-# fi
+    pecho "Would you like to set macOS prefs [y/N] "
+    read -r response ; tput sgr0
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+        source macos
+    fi
+fi
+
 
 ###############################################################################
 # Install yum packages

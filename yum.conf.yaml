@@ -7,41 +7,43 @@
 - yum: [gdb, valgrind]
 
 - yum:
-    - ack
-    - bash-completion
-    - automake
-    - gcc
-    - gcc-c++
-    - kernel-devel
-    - cmake
-    - diff-so-fancy
-    - findutils
-    - openssl
-    - fzf
-    - git
-    - git-extras
-    - highlight
-    - htop
-    - httpie
-    - python
-    - python-devel
-    - python3
-    - python3-devel
-    - hugo
-    - jq
-    - lnav
-    - mysql
-    - mycli
-    - the_silver_searcher
-    - yarn
-    - wget
-    - thefuck
-    - tmux
-    - tree
-    - lf
-    - node
-    - nvm
-    - tig
-    - mosh
-    - python-pip
+    vim-enhanced:
+        options: '--disablerepo=* --enablerepo=epel'
+    ack:
+    bash-completion:
+    automake:
+    gcc:
+    gcc-c++:
+    kernel-devel:
+    cmake:
+    diff-so-fancy:
+    findutils:
+    openssl:
+    fzf:
+    git:
+    git-extras:
+    highlight:
+    htop:
+    httpie:
+    python:
+    python-devel:
+    python3:
+    python3-devel:
+    hugo:
+    jq:
+    lnav:
+    mysql:
+    mycli:
+    the_silver_searcher:
+    yarn:
+    wget:
+    thefuck:
+    tmux:
+    tree:
+    lf:
+    node:
+    nvm:
+    tig:
+    mosh:
+    python-pip:
 

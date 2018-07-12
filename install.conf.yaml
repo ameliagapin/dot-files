@@ -1,5 +1,8 @@
 - defaults:
-    - force: true
+    link:
+        force: true
+        create: true
+        relink: true
 
 - clean: ['~']
 
@@ -16,7 +19,6 @@
     ~/.functions: functions
     ~/.extra: extra
     ~/.exports: exports
-    ~/.bashrc: bashrc
     ~/.aliases: aliases
     ~/.git-prompt.sh: git-prompt.sh
     ~/.bash_prompt: bash_prompt

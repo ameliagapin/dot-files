@@ -42,7 +42,7 @@ PS1+='$(git branch &>/dev/null;\
 PS1+="\`parse_git_branch\`"
 PS1+="\[\e[m\]"
 
-ME_EMOJI=(🙄 🙏 ☠️  💩 🔪 🖕 🤷 👩 💻)
+ME_EMOJI=(🙄 🙏 💩 🔪 🖕 🤷 👩 💻 💀)
 INDEX=$[RANDOM%9]
 RANDOM_EMOJI="${ME_EMOJI[$INDEX]}"
 PS1+="${RANDOM_EMOJI} "

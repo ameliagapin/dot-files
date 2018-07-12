@@ -7,7 +7,6 @@ export PATH=$PATH:$(go env GOPATH)/bin
 
 # Add `~/.nvm` to the `$PATH`
 export NVM_DIR="$HOME/.nvm"
-  . "/usr/local/opt/nvm/nvm.sh"
 
 #Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -54,3 +53,6 @@ complete -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+export HISTCONTROL=erasedups
+export HISTSIZE=10000
+export PATH=/bitly/local/bin:$PATH

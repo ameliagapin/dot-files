@@ -1,4 +1,5 @@
 - npm:
+    - diff-so-fancy
     - tldr
     - debug
     - http-server

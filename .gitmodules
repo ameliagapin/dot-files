@@ -10,6 +10,9 @@
 [submodule "dotbot-yum"]
 	path = dotbot-yum
 	url = https://gitlab.com/flyingchipmunk/dotbot-yum.git
+[submodule "dotbot-npm"]
+	path = dotbot-npm
+	url = https://github.com/ameliagapin/dotbot-npm.git
 [submodule "dotbot_plugin_aptget"]
 	path = dotbot_plugin_aptget
 	url = https://github.com/dein0s/dotbot_plugin_aptget.git

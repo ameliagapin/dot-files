@@ -25,12 +25,11 @@ DOTBOT_BIN="bin/dotbot"
 cd "${BASEDIR}"
 
 git submodule update --init --recursive "${DOTBOT_DIR}"
-
-git submodule add https://github.com/sobolevn/dotbot-brewfile.git
-git submodule add https://github.com/sobolevn/dotbot-pip.git
-git submodule add https://gitlab.com/flyingchipmunk/dotbot-yum.git
-git submodule add https://github.com/dein0s/dotbot_plugin_aptget.git
-git submodule add https://github.com/ameliagapin/dotbot-npm.git
+git submodule update --init --recursive "dotbot-brewfile"
+git submodule update --init --recursive "dotbot-pip"
+git submodule update --init --recursive "dotbot-yum"
+git submodule update --init --recursive "dotbot-npm"
+git submodule update --init --recursive "dotbot_plugin_aptget"
 
 ###############################################################################
 # Link dotfiles

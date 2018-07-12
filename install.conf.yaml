@@ -1,3 +1,6 @@
+- defaults:
+    - force: true
+
 - clean: ['~']
 
 - link:
@@ -8,7 +11,6 @@
     ~/.ssh/config:
         path: ssh/config
         create: true
-    ~/.zshrc: zshrc
     ~/.vim: vim
     ~/.vimrc: vimrc
     ~/.functions: functions
@@ -16,7 +18,8 @@
     ~/.exports: exports
     ~/.bashrc: bashrc
     ~/.aliases: aliases
-    ~/.bash_prompt: bash_prompt
     ~/.git-prompt.sh: git-prompt.sh
+    ~/.bash_prompt: bash_prompt
     ~/.screenrc: screenrc
     ~/.tmux.conf: tmux.conf
+    ~/.bitly: bitly

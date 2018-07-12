@@ -21,7 +21,7 @@ function parse_git_branch() {
 	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
 	if [ ! "${BRANCH}" == "" ]
 	then
-        echo "(${BRANCH})"
+        echo "(${BRANCH}) "
 	else
 		echo ""
 	fi
@@ -43,8 +43,8 @@ PS1+="\`parse_git_branch\`"
 PS1+="\[\e[m\]"
 
 ME_EMOJI=(🙄 🙏 ☠️  💩 🔪 🖕 🤷 👩 💻)
-INDEX=$[RANDOM%6]
+INDEX=$[RANDOM%9]
 RANDOM_EMOJI="${ME_EMOJI[$INDEX]}"
-PS1+=" ${RANDOM_EMOJI} "
+PS1+="${RANDOM_EMOJI} "
 
 export PS1;

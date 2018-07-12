@@ -4,6 +4,8 @@ Host bitly.org *.bitly.org
   ForwardAgent yes
   StrictHostKeyChecking no
   UserKnownHostsFile=/dev/null
+Host *.bitly.net
+  ForwardAgent yes
 Host jump02.ec2.bitly.net
   ForwardAgent yes
 Host jump01.dc4.bitly.net

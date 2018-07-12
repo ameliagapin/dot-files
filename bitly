@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+###############################################################################
+# Bitly                                                                       #
+###############################################################################
+
+GOBIN=/bitly/local/go/bin
+PATH=$PATH:/bitly/local/bin
+
+alias dev="cd ~/Projects/bitly"
+alias bitly="cd /bitly/src/github.com/bitly/bitly"
+alias mountall="sudo mount /bitly && sudo mount /data"
+alias yorebase="git checkout master && git fetch bitly && git rebase bitly/master && git push -f ameliagapin master"
+
+alias flush_mc="echo '\''flush_all'\'' | nc localhost 11211"
+alias fix_time='ntpdate -s time.nist.gov'
+
+function rb() {
+    local account="$(git config --get gitOpenPull.baseAccount)"
+    git fetch $account || return
+    git rebase -i ${account}/master || return
+}
+
+function egb() {
+    /bitly/src/github.com/bitly/bitly/export.sh ${1}#gobuild
+}
+
+function yorebaseit() {
+    local account="$(git config --get gitOpenPull.baseAccount)"
+    git checkout master || return
+    git fetch $account || return
+    git fetch ameliagapin || return
+    git rebase $account/master || return
+    git push -f ameliagapin master || return
+    git checkout ${1} || return
+    git rebase ameliagapin/${1} || return
+    git rebase $account/master || return
+    git push -f ameliagapin ${1} || return
+}
+
+function testr() {
+    ssh -AJ ameliagapin@jump03.ec2.bitly.net "root@testrunnerssd${1}.bitly.org"
+}

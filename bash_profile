@@ -1,8 +1,8 @@
 # Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH";
+export PATH=$HOME/bin:$PATH;
 
 # GO
-export GOPATH=$HOME/Projects/go
+export GOPATH=$HOME/Projects/go:/bitly
 export PATH=$PATH:$(go env GOPATH)/bin
 
 # Add `~/.nvm` to the `$PATH`
@@ -12,7 +12,7 @@ export NVM_DIR="$HOME/.nvm"
 #Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.{path,bitly,bash_prompt,exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

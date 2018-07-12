@@ -16,12 +16,10 @@ alias -- -="cd -"
 alias dropbox="cd ~/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-alias p="cd ~/Projects"
-alias g="git"
-alias h="history"
-alias j="jobs"
+alias pj="cd ~/Projects"
 
 # aliases
+alias p="vim ~/.bash_profile"
 alias s="source ~/.bash_profile"
 
 ###############################################################################
@@ -31,8 +29,6 @@ alias s="source ~/.bash_profile"
 # mysql
 alias mysql=/usr/local/mysql/bin/mysql
 alias mysqladmin=/usr/local/mysql/bin/mysqladmin
-
-alias p="vim ~/.bash_profile"
 
 # vagrant
 alias vp="vagrant provision"
@@ -47,14 +43,6 @@ alias gpm="git pull origin master"
 alias gnb="git checkout -b"
 alias gcmp="git checkout master && git pull"
 
-###############################################################################
-# Bitly                                                                       #
-###############################################################################
-
-alias dev="cd ~/Projects/devvm"
-alias bitly="cd /bitly"
-alias data="cd /data"
-alias mountall="sudo mount /bitly && sudo mount /data"
 
 ###############################################################################
 # Other shit                                                                  #

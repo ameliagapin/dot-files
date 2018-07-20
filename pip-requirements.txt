@@ -14,6 +14,7 @@ ipaddress==1.0.22
 kafka-python
 kiwisolver
 matplotlib
+mycli
 netifaces
 numpy
 nvidia-ml-py
@@ -40,6 +41,7 @@ scandir
 six
 statsd
 subprocess32
+thefuck
 urllib3
 websocket-client
 wifi

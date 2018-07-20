@@ -132,6 +132,18 @@ if [[ ! -z $YUM_CMD ]] ; then
     if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
         echo "Installing yum packages:"
 
+        # Need to add this repo for vim8
+        curl -L https://copr.fedorainfracloud.org/coprs/mcepl/vim8/repo/epel-7/mcepl-vim8-epel-7.repo -o /etc/yum.repos.d/mcepl-vim8-epel-7.repo
+
+        # Need to add this repo for node
+        curl -sL https://rpm.nodesource.com/setup_6.x | sudo -E bash -
+
+        # Python3
+        sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
+
+        # Yarn
+        curl -sL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo
+
         "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -p dotbot-yum/yum.py -c "${CONFIG}" "${@}"
     fi
 fi

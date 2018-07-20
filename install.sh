@@ -214,11 +214,7 @@ read -r response ; tput sgr0
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
     pecho "Cleaning/Installing/Updating Vim plugins:\n"
 
-    vim +PlugInstall +GoInstallBinaries +qall
-
-    # Compile YouCompleteMe
-    cd ~/.vim/plugged/youcompleteme
-    /usr/bin/python ./install.py --all
+    vim +PlugClean +PlugInstall +qall
 fi
 
 ###############################################################################

@@ -7,6 +7,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " Plug ins, managed by vim-plug
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !/usr/bin/python install.py --all
+  endif
+endfunction
+
 call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
@@ -14,12 +20,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
-Plug 'valloric/youcompleteme'
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jszakmeister/vim-togglecursor'
 Plug 'w0rp/ale'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'severin-lemaignan/vim-minimap'
 Plug 'godlygeek/csapprox'
 Plug 'leafgarland/typescript-vim'

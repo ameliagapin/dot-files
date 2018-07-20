@@ -1,6 +1,7 @@
 - npm:
     - diff-so-fancy
     - tldr
+    - xbuild
     - debug
     - http-server
     - json-server

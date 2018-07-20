@@ -780,6 +780,12 @@ defaults write org.m0k.transmission BlocklistAutoUpdate -bool true
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
+# This should help reset the icon caches
+sudo find /private/var/folders/ \ -name com.apple.dock.iconcache -exec rm {} \;
+sudo find /private/var/folders/ \ -name com.apple.iconservices -exec rm -rf {} \;
+sudo rm -rf /Library/Caches/com.apple.iconservices.store
+/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -seed
+
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	"Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
 	"Opera" "Photos" "Safari" "SizeUp" "Spectacle" "SystemUIServer" "Terminal" \

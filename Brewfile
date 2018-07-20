@@ -16,6 +16,7 @@ brew "fzf"
 brew "gifsicle"
 brew "git"
 brew "git-extras"
+brew "go"
 brew "gnu-sed", args: ["with-default-names"]
 brew "graphviz"
 brew "highlight"
@@ -72,13 +73,13 @@ mas "Bear", id: 1091189122
 mas "Buffer", id: 891953906
 mas "feedly", id: 865500966
 mas "GIPHY CAPTURE", id: 668208984
-mas "iMovie", id: 408981434
-mas "Keynote", id: 409183694
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
 mas "Pocket", id: 568494494
 mas "Skitch", id: 425955336
 mas "Slack", id: 803453959
 mas "StopTheMadness", id: 1376402589
 mas "Tweetbot", id: 1384080005
 mas "Xcode", id: 497799835
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541

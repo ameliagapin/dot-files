@@ -57,18 +57,7 @@ if [[ "$OSTYPE" =~ ^darwin ]] ; then
     read -r response ; tput sgr0
     if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
 
-        pecho "Would you like to install Mac App Store apps [y/N] "
-        read -r response ; tput sgr0
-        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
-            # Have to install mas so we can do the signin
-            brew install mas
-
-            pecho "What is you iCloud account email address? "
-            read -r response ; tput sgr0
-            mas signin $response
-        fi
-
-        echo "Installing brew and formulae (z, fzf, thefuck, etc...):"
+        echo "Installing brew:"
 
         # brew installed?
         which -s brew
@@ -81,6 +70,19 @@ if [[ "$OSTYPE" =~ ^darwin ]] ; then
             brew update
             brew upgrade
         fi
+
+        pecho "Would you like to install Mac App Store apps [y/N] "
+        read -r response ; tput sgr0
+        if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+            # Have to install mas so we can do the signin
+            brew install mas
+
+            pecho "What is you iCloud account email address? "
+            read -r response ; tput sgr0
+            mas signin $response
+        fi
+
+        echo "Installing (z, fzf, thefuck, etc...):"
 
         # Double check we've installed brew correctly
         if command -v brew >/dev/null 2>&1 ; then

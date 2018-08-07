@@ -32,6 +32,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'rking/ag.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'powerline/powerline-fonts'
+Plug 'kevinw/pyflakes-vim'
 call plug#end()
 
 " Turn off line wrapping
@@ -39,6 +40,10 @@ set nowrap
 
 " Set noshowmode to hide --INSERT-- from status line
 set noshowmode
+
+" For pyflakes
+filetype on            " enables filetype detection
+filetype plugin on     " enables filetype specific plugins
 
 " Colorz
 set t_Co=256

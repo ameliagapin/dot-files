@@ -30,7 +30,6 @@ Plug 'severin-lemaignan/vim-minimap'
 Plug 'godlygeek/csapprox'
 Plug 'leafgarland/typescript-vim'
 Plug 'rking/ag.vim'
-Plug 'leafgarland/typescript-vim'
 Plug 'powerline/powerline-fonts'
 Plug 'kevinw/pyflakes-vim'
 call plug#end()

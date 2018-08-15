@@ -5,7 +5,7 @@
 ###############################################################################
 
 GOBIN=/bitly/local/go/bin
-PATH=$PATH:/bitly/local/bin
+export PATH=$PATH:/bitly/local/bin
 
 alias dev="cd ~/Projects/bitly"
 alias bitly="cd /bitly/src/github.com/bitly/bitly"
@@ -40,4 +40,14 @@ function yorebaseit() {
 
 function testr() {
     ssh -AJ ameliagapin@jump03.ec2.bitly.net "root@testrunnerssd${1}.bitly.org"
+}
+
+function newb() {
+    local account="$(git config --get gitOpenPull.baseAccount)"
+    git checkout master || return
+    git fetch $account || return
+    git fetch ameliagapin || return
+    git rebase $account/master || return
+    git push -f ameliagapin master || return
+    git checkout -b ${1} master --no-track
 }

@@ -215,6 +215,8 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
     pecho "Cleaning/Installing/Updating Vim plugins:\n"
 
     vim +PlugClean +PlugInstall +qall
+
+    mkdir -p ~/.vim/undo
 fi
 
 ###############################################################################

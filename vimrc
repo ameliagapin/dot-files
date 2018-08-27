@@ -131,8 +131,8 @@ set ignorecase
 " Highlight dynamically as pattern is typed
 set incsearch
 
-" Clear previous search highlighting by hitting enter
-nnoremap <CR> :noh<CR><CR>
+" Clear previous search highlighting by hitting ESC ESC
+nnoremap <ESC><ESC> :noh<CR><CR>
 
 " Always show status line
 set laststatus=2

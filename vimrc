@@ -89,6 +89,10 @@ endif
 " Don’t create backups when editing files in certain directories
 set backupskip=/tmp/*,/private/tmp/*
 
+" Folding
+set foldmethod=indent
+set nofoldenable
+
 " Respect modeline in files
 set modeline
 set modelines=4

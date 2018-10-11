@@ -235,3 +235,8 @@ function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
+# `compile_ycmd` will handle setting up ycmd for vim with all languages
+function compile_ycmd() {
+    cd ~/.vim/plugged/YouCompleteMe
+    /usr/bin/python ./install.py --all
+}

@@ -39,7 +39,7 @@ function yorebaseit() {
 }
 
 function testr() {
-    ssh -AJ ameliagapin@jump03.ec2.bitly.net "root@testrunnerssd${1}.bitly.org"
+    ssh -AJ ameliagapin@jdev01.gc4.bitly.net "root@testrunnerssd${1}.bitly.org"
 }
 
 function newb() {

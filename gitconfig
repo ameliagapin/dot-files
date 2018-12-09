@@ -12,7 +12,7 @@
 [alias]
     save = "!git add -A && git commit -m 'SAVEPOINT'"
     wip = "!git add -u && git commit -m 'WIP'"
-    undo = "reset HEAD~1 --mixed"
+    upwip = "reset HEAD~1 --mixed"
 
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit

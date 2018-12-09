@@ -2,7 +2,7 @@
 export PATH=$HOME/bin:$PATH;
 
 # GO
-export GOPATH=$HOME/Projects/go:/bitly
+export GOPATH=$HOME/Projects/go:$HOME/go
 export PATH=$PATH:$(go env GOPATH)/bin
 
 # Add `~/.nvm` to the `$PATH`

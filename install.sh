@@ -45,6 +45,18 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
     "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
 fi
 
+
+pecho "Would you like to link bitly dotfiles [y/N] "
+read -r response ; tput sgr0
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+    echo "Linking bitly dotfiles:"
+
+    CONFIG="install_bitly.conf.yaml"
+
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+fi
+
+
 ###############################################################################
 # Install brew + formulae (macOS only)
 ###############################################################################

@@ -83,6 +83,7 @@ let mapleader=","
 set nobackup
 set noswapfile
 if exists("&undodir")
+    set undofile " Maintain undo history between sessions
     set undodir=~/.vim/undo
 endif
 
@@ -137,6 +138,9 @@ set incsearch
 
 " Clear previous search highlighting by hitting ESC ESC
 nnoremap <ESC><ESC> :noh<CR><CR>
+
+" Map 00 to ^ for going to the first non-whitespace character on a line
+noremap 00 ^
 
 " Always show status line
 set laststatus=2

@@ -12,7 +12,7 @@ alias bitly="cd /bitly/src/github.com/bitly/bitly"
 alias mountall="sudo mount /bitly && sudo mount /data"
 alias yorebase="git checkout master && git fetch bitly && git rebase bitly/master && git push -f ameliagapin master"
 
-alias flush_mc="echo '\''flush_all'\'' | nc localhost 11211"
+alias flush_mc='echo '\''flush_all'\'' | nc localhost 11211'
 alias fix_time='ntpdate -s time.nist.gov'
 
 function rb() {

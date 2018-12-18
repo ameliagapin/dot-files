@@ -430,12 +430,22 @@ noremap <C-b> :CtrlPBuffer<cr>
 " vimgo
 "
 let g:go_auto_sameids = 1 " Auto higlight all references to symbol under the cursor
-set updatetime=100 " Update status line info every 100ms
+set updatetime=200 " Update status line info every 100ms
 let g:go_auto_type_info = 1 " Automatically show type info in status line for type under cursor
 let g:go_fmt_command = "goimports"
 let g:go_decls_includes = "func,type" " Show funcs and types in declaration list
 nmap <leader>gi :GoInfo<CR>  " Show method signature for a Go method in status line
 nmap <leader>gd :GoDoc<CR>  " Show info for a Go method in scratch area
+" Highlighting - This may slow vim down
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
 
 "
 " YouCompleteMe

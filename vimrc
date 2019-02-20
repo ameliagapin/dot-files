@@ -32,6 +32,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'rking/ag.vim'
 Plug 'powerline/powerline-fonts'
 Plug 'kevinw/pyflakes-vim'
+Plug 'luochen1990/rainbow'
 call plug#end()
 
 " Turn off line wrapping
@@ -386,6 +387,10 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 "
 let g:minimap_highlight='Statement'
 
+"
+" Rainbow Parentheses
+"
+let g:rainbow_active = 1
 
 "
 " NERDCommenter

@@ -13,8 +13,19 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
 
-cd "${BASEDIR}"
-git submodule add -f https://github.com/anishathalye/dotbot.git
+pecho "Would you like to install dotbot [y/N] "
+read -r response ; tput sgr0
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+    echo "Installing dotbot:"
+    git submodule add -f https://github.com/anishathalye/dotbot.git
+else
+    pecho "Would you like to update dotbot [y/N] "
+    read -r response ; tput sgr0
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+        echo "Updating dotbot:"
+        git submodule update --init --recursive "${DOTBOT_DIR}"
+    fi
+fi
 
 ###############################################################################
 # Link dotfiles
@@ -63,7 +74,7 @@ if [[ ! -z $YUM_CMD ]]; then
     pecho "Would you like to install yum packages [y/N] "
     read -r response ; tput sgr0
     if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
-        echo "Installing yumt packages:"
+        echo "Installing yum packages:"
 
         bin/yum.sh "${CONFIG}" || exit 1
     fi

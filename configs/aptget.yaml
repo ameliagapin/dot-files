@@ -1,0 +1,43 @@
+pre:
+  curl:
+    - https://deb.nodesource.com/setup_12.x
+
+repos:
+  - ppa:dawidd0811/neofetch
+  - ppa:jonathonf/vim
+  - universe
+
+packages:
+  - ack-grep
+  - zsh
+  - vim
+  - tmux
+  - automake
+  - build-essential
+  - linux-headers-generic
+  - cmake
+  - findutils
+  - openssl
+  - git-extras
+  - htop
+  - highlight
+  - httpie
+  - fzf
+  - neofetch
+  - python
+  - python-dev
+  - python3
+  - python3-dev
+  - hugo
+  - jq
+  - lnav
+  - mysql-server
+  - mycli
+  - silversearcher-ag
+  - wget
+  - thefuck
+  - tree
+  - tig
+  - python-pip
+  - nodejs
+  - nodejs

@@ -1,0 +1,83 @@
+% bitly
+
+# Bitly - Deploy
+/bitly/src/github.com/bitly/bitly/deploy.sh
+
+# Bitly - Update VM
+/bitly/src/github.com/bitly/bitly/update_vm.sh
+
+# Bitly - Run service locally
+/bitly/src/github.com/bitly/bitly/run_locally.sh <service>
+
+$ service: python /bitly/src/github.com/bitly/bitly/services.py --list
+
+# Bitly - Run queuereader locally
+python /bitly/src/github.com/bitly/bitly/services.py --install=<queuereader> && svc -u /service/<queuereader> && /bitly/src/github.com/bitly/bitly/run_locally.sh <queuereader>
+
+$ queuereader: ls /service | grep queuereader
+
+# Bitly - List down services
+svstat /service/* | grep down
+
+# Bitly - List up services (running)
+svstat /service/* | grep up
+
+# Bitly - Start application
+/bitly/src/github.com/bitly/bitly/start_app.sh <application>
+
+$ application: find {/bitly/src/github.com/bitly/bitly/,/bitly/src/github.com/bitly/bitly/infrastructure/} -type d -maxdepth 1 -printf "%f\n"
+
+# Bitly - Stop application
+/bitly/src/github.com/bitly/bitly/stop_app.sh <application>
+
+# Bitly - Export application
+/bitly/src/github.com/bitly/bitly/export.sh <application>
+
+# Bitly - List ports in use
+python /bitly/src/github.com/bitly/bitly/services.py --list_ports
+
+# Bitly - Tail service log
+tail -Fn<lines_back> /service/<service>/log/current
+
+# Bitly - Swagger validate
+swagger validate /bitly/src/github.com/bitly/bitly/v4_api/<api_service>/<api_service>.yaml
+
+$ api_service: printf "v4_api\nv4_public_api"
+
+# Bitly - Update Swagger codegen client
+/bitly/src/github.com/bitly/bitly/v4_api/scripts/update-codegen-client.sh
+
+# Bitly - Frontend dev watch
+/bitly/src/github.com/bitly/bitly/hamburger/bbt2/dev-watch.sh
+
+# Bitly - Upload node modules
+/bitly/src/github.com/bitly/bitly/hamburger/bbt2/upload_node_modules.sh
+
+# Bitly - Install bbt2 node modules
+/bitly/src/github.com/bitly/bitly/infrastructure/install_scripts/install_bbt2_node_modules.sh
+
+# Bitly - Install bbt2 build
+/bitly/src/github.com/bitly/bitly/infrastructure/install_scripts/install_bbt2_build.sh
+
+# Bitly - Use most recent python lib file
+/bitly/src/github.com/bitly/bitly/infrastructure/bin/use_most_recent_lib_file.sh <application>/lib/<file_with_ext>
+
+# Bitly - Generate Go ratelimits file
+cd /bitly/src/github.com/bitly/bitly/v3_api/exported/ratelimits && go generate && cd -
+
+# Bitly - MySQL
+mysql -u root -p<password> <database>
+
+# Bitly - NSQ tail on vm
+nsq_tail -nsqd-tcp-address=127.0.0.1:4150 -topic <topic_name>
+
+# Bitly - Clear cache (flush)
+memflush --servers=127.0.0.1:<mc_port>
+
+$ mc_port: printf "billing 8703 \n campaign 8702 \n deeplinks 8701 \n eshistory 8701 \n feature_usage 8700 \n user_management 8705 \n memcached 11211" | column -t --- --column 2
+
+# Bitly - Git cleanup
+git cleanup --auto=True
+
+# Bitly - Git open-pull
+git open-pull

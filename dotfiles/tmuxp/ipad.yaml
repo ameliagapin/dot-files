@@ -1,0 +1,8 @@
+session_name: ipad
+windows:
+- window_name: ipad
+  layout: main-vertical
+  panes:
+    - vim
+    - clear
+    - clear

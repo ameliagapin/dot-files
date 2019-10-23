@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+if [[ -f ~/.git-prompt.sh ]]; then
+    source ~/.git-prompt.sh
+fi
+
+# Limit directory path to three levels
+PROMPT_DIRTRIM=3
+
+if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
+    export TERM='gnome-256color';
+elif infocmp xterm-256color >/dev/null 2>&1; then
+    export TERM='xterm-256color';
+fi;
+
+
+# Prompt built with help of http://ezprompt.net
+
+# get current branch in git repo
+function parse_git_branch() {
+	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	if [ ! "${BRANCH}" == "" ]
+	then
+        echo "(${BRANCH}) "
+	else
+		echo ""
+	fi
+}
+
+PS1="\[\e[0;90m\]\t\[\e[m\] \[\e[0;36m\]\u\[\e[m\]@\[\e[0;94m\]\h\[\e[m\] \[\e[1;33m\]\w\[\e[m\] "
+PS1+='$(git branch &>/dev/null;\
+ if [ $? -eq 0 ]; then \
+     echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
+     if [ "$?" -eq "0" ]; then \
+         # @4 - Clean repository - nothing to commit
+         echo "\[\e[0;32m\]"
+     else \
+         # @5 - Changes to working tree
+         echo "\[\e[0;91m\]"
+     fi)"; \
+ fi)';
+PS1+="\`parse_git_branch\`"
+PS1+="\[\e[m\]"
+
+ME_EMOJI=(🙄 🙏 💩 🔪 🖕 🤷 👩 💻 💀)
+INDEX=$[RANDOM%9]
+RANDOM_EMOJI="${ME_EMOJI[$INDEX]}"
+PS1+="${RANDOM_EMOJI} "
+
+export PS1;
+

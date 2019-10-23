@@ -1,0 +1,15 @@
+session_name: bitly
+windows:
+- window_name: bitly
+  # Custom layout
+  layout: 8152,477x133,0,0{196x133,0,0,0,150x133,197,0[150x66,197,0,1,150x66,197,67,3],129x133,348,0[129x33,348,0,2,129x32,348,34,6,129x33,348,67,4,129x32,348,101,5]}
+  shell_command_before:
+    - bitly
+  panes:
+    - vim
+    - pane
+    - pane
+    - pane
+    - pane
+    - pane
+    - pane

@@ -1,0 +1,23 @@
+packages:
+  - diff-so-fancy
+  - tldr
+  - xbuild
+  - debug
+  - http-server
+  - json-server
+  - express
+  - react
+  - request
+  - debug
+  - async
+  - moment
+  - redux
+  - winston
+  - botkit
+  - valid-url
+  - microtime
+  - git-open
+  - internal-ip-cli
+  - public-ip-cli
+  - dockly
+  - gtop

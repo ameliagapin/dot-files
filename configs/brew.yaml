@@ -1,0 +1,141 @@
+tap:
+  - heroku/brew
+  - homebrew/bundle
+  - homebrew/cask
+  - homebrew/core
+
+packages:
+  - name: zsh
+    args: --
+  - name: zsh-completions
+    args: --
+  - name: ack
+    args: --
+  - name: bash
+    args: --
+  - name: bash-completion
+    args: --
+  - name: cmake
+    args: --
+  - name: coreutils
+    args: --
+  - name: diff-so-fancy
+    args: --
+  - name: findutils
+    args: --
+  - name: openssl
+    args: --
+  - name: sqlite
+    args: --
+  - name: fpp
+    args: --
+  - name: fzf
+    args: --
+  - name: gifsicle
+    args: --
+  - name: git
+    args: --
+  - name: git-extras
+    args: --
+  - name: go
+    args: --
+  - name: graphviz
+    args: --
+  - name: highlight
+    args: --
+  - name: htop
+    args: --
+  - name: python
+    args: --
+  - name: httpie
+    args: --
+  - name: hugo
+    args: --
+  - name: imagemagick
+    args: with-webp
+  - name: jq
+    args: --
+  - name: lf
+    args: --
+  - name: lnav
+    args: --
+  - name: lynx
+    args: --
+  - name: mas
+    args: --
+  - name: mongodb
+    args: --
+  - name: mosh
+    args: --
+  - name: mycli
+    args: --
+  - name: mysql
+    args: --
+  - name: nmap
+    args: --
+  - name: node
+    args: --
+  - name: nvm
+    args: --
+  - name: ruby
+    args: --
+  - name: the_silver_searcher
+    args: --
+  - name: thefuck
+    args: --
+  - name: tig
+    args: --
+  - name: tmux
+    args: --
+  - name: tree
+    args: --
+  - name: vim
+    args: --with-override-system-vi
+  - name: wget
+    args: --
+  - name: yarn
+    args: --
+  - name: z
+    args: --
+  - name: heroku/brew/heroku
+    args:
+  - name: neofetch
+    args: 
+
+cask:
+  - atom
+  - cheatsheet
+  - coderunner
+  - dash
+  - firefox
+  - dropbox
+  - github
+  - google-chrome
+  - google-drive-file-stream
+  - iterm2
+  - lastpass
+  - macdown
+  - macvim
+  - ngrok
+  - postman
+  - rocket
+  - skype
+  - sublime
+  - vagrant
+
+mas:
+  - 918858936 # Airmail 3
+  - 918207447 # Annotate
+  - 1091189122 # Bear
+  - 891953906 # Buffer
+  - 865500966 # feedly
+  - 668208984 # Giphy Capture
+  - 568494494 # Pocket
+  - 425955336 # Skitch
+  - 803453959 # Slack
+  - 1376402589 # StopTheMadness
+  - 1384080005 # Tweetbot
+  - 497799835 # xcode
+  - 409183694 # keynote
+  - 409203825 # Numbers
+  - 409201541 # Pages

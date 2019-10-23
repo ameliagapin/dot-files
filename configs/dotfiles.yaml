@@ -1,0 +1,28 @@
+- defaults:
+    link:
+        force: true
+        create: true
+        relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.bash_profile: dotfiles/bash_profile
+    ~/.bash_prompt: dotfiles/bash_prompt
+    ~/.bashrc: dotfiles/bashrc
+    ~/.gitconfig: dotfiles/gitconfig
+    ~/.ssh/config:
+        path: dotfiles/ssh/config
+        create: true
+    ~/.vim: dotfiles/vim
+    ~/.vimrc: dotfiles/vimrc
+    ~/.zshrc: dotfiles/zshrc
+    ~/.functions: dotfiles/functions
+    ~/.exports: dotfiles/exports
+    ~/.aliases: dotfiles/aliases
+    ~/.tmux.conf: dotfiles/tmux.conf
+    ~/.bitly: dotfiles/bitly
+    ~/.iterm: dotfiles/iterm
+    ~/.tmuxp: dotfiles/tmuxp
+    ~/.cheatsheets: dotfiles/cheatsheets
+

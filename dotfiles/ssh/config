@@ -1,0 +1,36 @@
+Host *
+  CheckHostIP no
+  SendEnv LANG
+Host 192.168.1.69
+  ForwardAgent yes
+
+##########################
+# BITLY
+##########################
+Host bitly.org *.bitly.org
+  Port 22
+  User root
+  ForwardAgent yes
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
+Host *.bitly.net
+  ForwardAgent yes
+Host jump02.ec2.bitly.net
+  ForwardAgent yes
+Host jump01.dc4.bitly.net
+  ForwardAgent yes
+  Host bitly.org *.bitly.org
+  Port 22
+  User root
+  ForwardAgent yes
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
+# special hostname for git checkout
+Host github-bitlydeploy
+  HostName github.com
+  User git
+  IdentityFile /root/.github_bitlydeploy
+Host zone_dump
+  HostName github.com
+  User git
+  IdentityFile /home/bitlyzonedump/.ssh/id_rsa

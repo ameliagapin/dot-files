@@ -1,0 +1,42 @@
+pre:
+  curl:
+    - https://rpm.nodesource.com/setup_6.x 
+
+repos:
+    - https://dl.yarnpkg.com/rpm/yarn.repo
+
+packages:
+  - https://centos7.iuscommunity.org/ius-release.rpm
+  - nodejs
+  - zsh
+  - vim-enhanced
+  - ack
+  - bash-completion
+  - automake
+  - gcc
+  - gcc-c++
+  - kernel-devel
+  - cmake
+  - findutils
+  - openssl
+  - git
+  - git-extras
+  - highlight
+  - htop
+  - httpie
+  - python
+  - python-devel
+  - python-pip
+  - python36
+  - python36-devel
+  - python36-pip
+  - jq
+  - lnav
+  - mysql
+  - the_silver_searcher
+  - wget
+  - tmux
+  - tree
+  - node
+  - tig
+  - mosh

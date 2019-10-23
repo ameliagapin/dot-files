@@ -14,6 +14,7 @@ DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
 
 cd "${BASEDIR}"
+git submodule add -f https://github.com/anishathalye/dotbot.git
 
 ###############################################################################
 # Link dotfiles

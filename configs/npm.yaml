@@ -13,7 +13,6 @@ packages:
   - moment
   - redux
   - winston
-  - botkit
   - valid-url
   - microtime
   - git-open

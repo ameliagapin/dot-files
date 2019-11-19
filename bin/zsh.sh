@@ -20,9 +20,12 @@ sudo ln -sf "$CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$CUSTOM/theme
 # pecho "Installing spaceship from npm...\n"
 # npm install -g spaceship-prompt # || exit 1
 
-# pecho "Installing plugins...\n"
+pecho "Installing plugins...\n"
+pecho "Installing zsh-autosuggetions...\n"
 clone https://github.com/zsh-users/zsh-autosuggestions ${OMZ}/plugins/zsh-autosuggestions || true
+pecho "Installing zsh-syntax-highlighting...\n"
 clone https://github.com/zsh-users/zsh-syntax-highlighting ${OMZ}/plugins/zsh-syntax-highlighting || true
+pecho "Installing navi...\n"
 clone https://github.com/denisidoro/navi ${OMZ}/plugins/navi || true
 
 exit 0

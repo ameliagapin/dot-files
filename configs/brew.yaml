@@ -47,6 +47,8 @@ packages:
     args: --
   - name: python
     args: --
+  - name: python@2
+    args: --
   - name: httpie
     args: --
   - name: hugo
@@ -100,7 +102,11 @@ packages:
   - name: heroku/brew/heroku
     args:
   - name: neofetch
-    args: 
+    args:
+  - name: docker
+    args:
+  - name: docker-machine
+    args:
 
 cask:
   - atom
@@ -120,7 +126,7 @@ cask:
   - postman
   - rocket
   - skype
-  - sublime
+  - sublime-text
   - vagrant
 
 mas:

@@ -200,6 +200,3 @@
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
-[gitOpenPull]
-	postProcess = /bitly/local/bin/git-open-pull-post-process
-	callback = /bitly/local/bin/git-open-pull-callback

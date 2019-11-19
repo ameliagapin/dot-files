@@ -16,22 +16,21 @@ pecho "Install Xcode command line tools? [y/N]"
 read -r response ; tput sgr0
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
     # we will need this installed
-    xcode-select --install 
+    xcode-select --install || true
 fi
 
 # brew installed?
-which -s brew
-if [[ $? != 0 ]] ; then
+if [[ $(command -v brew) == "" ]]; then
     # install Homebrew
     echo "Installing brew:"
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
     echo "Brew already installed. Let's make sure your formulae are up to date:"
-    brew update > /dev/null | exit 1
-    brew upgrade > /dev/null | exit 1
+    brew update > /dev/null || exit 1
+    brew upgrade > /dev/null || exit 1
 fi
 
-pecho "Install taps...\n"
+pecho "Installing taps...\n"
 for i in ${tap[*]};do
     echo "Installing $i...\n"
     brew tap $i > /dev/null || exit 1
@@ -55,9 +54,9 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
     # Have to install mas so we can do the signin
     brew install mas > /dev/null || true
 
-    pecho "What is you iCloud account email address? "
-    read -r response ; tput sgr0
-    mas signin $response
+#    pecho "What is you iCloud account email address? "
+#    read -r response ; tput sgr0
+#    mas signin $response
 
     pecho "Installing Mac App Store apps...\n"
     for i in ${mas[*]}; do

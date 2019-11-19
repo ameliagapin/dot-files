@@ -9,15 +9,27 @@ if [ -f "$bitgo" ]; then
     source $bitgo
 fi
 
-alias dev="cd ~/Projects/bitly"
+alias dev="cd ~/Projects/bitlyvm"
 alias bitly="cd /bitly/src/github.com/bitly/bitly"
-alias mountall="sudo mount /bitly && sudo mount /data"
+alias mountall="mount_bitly"
 alias yorebase="git checkout master && git fetch bitly && git rebase bitly/master && git push -f ameliagapin master"
 
 alias tdev="open_tmux_session"
 
 alias flush_mc='echo '\''flush_all'\'' | nc localhost 11211'
 alias fix_time='ntpdate -s time.nist.gov'
+
+function mount_bitly() {
+    for dir in bitly data ; do
+        echo "Ensuring /Volumes/${dir} exists..."
+        sudo mkdir -p "/Volumes/${dir}"
+        echo "Owning /Volumes/${dir}..."
+        sudo chown ${USER}:staff "/Volumes/${dir}"
+        echo "Mounting /Volumes/${dir}..."
+        sudo mount /Volumes/${dir}
+    done
+    echo "You should be good to go! maybe"
+}
 
 function open_tmux_session() {
     tmux new-session

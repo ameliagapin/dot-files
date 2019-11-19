@@ -18,6 +18,7 @@ is_set() {
         true
     fi
 }
+
 clone() {
     SRC=$1
     LOC=$2
@@ -32,7 +33,7 @@ clone() {
         git pull $SRC || true
     fi
 
-    exit 0
+    return 0
 }
 
 # Based on https://gist.github.com/pkuczynski/8665367

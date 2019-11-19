@@ -16,3 +16,4 @@ node_modules
 ######################
 dotfiles/vim/plugged
 dotfiles/vim/undo
+dotbot

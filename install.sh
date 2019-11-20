@@ -172,6 +172,20 @@ fi
 # Update Vim plugins
 ###############################################################################
 
+
+# CentOS 7 may need a vim upgrade
+YUM_CMD=$(which yum) 2> /dev/null
+if [[ ! -z $YUM_CMD ]]; then
+    pecho "Do you need to update vim? [y/N] "
+    read -r response ; tput sgr0
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+        rpm -Uvh http://mirror.ghettoforge.org/distributions/gf/gf-release-latest.gf.el7.noarch.rpm
+        rpm --import http://mirror.ghettoforge.org/distributions/gf/RPM-GPG-KEY-gf.el7
+        yum -y remove vim-minimal vim-common vim-enhanced
+        yum -y --enablerepo=gf-plus install vim-enhanced
+    fi
+fi
+
 pecho "Would you like to clean and install vim plugins [y/N] "
 read -r response ; tput sgr0
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
@@ -227,7 +241,7 @@ pecho "Would you like to configure zsh [y/N] "
 read -r response ; tput sgr0
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
     echo "Configuring zsh:"
-    sudo bin/zsh.sh || exit 1
+    bin/zsh.sh || exit 1
 
     # make default
     pecho "Setting zsh as default...\n"

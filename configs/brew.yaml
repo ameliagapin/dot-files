@@ -112,6 +112,7 @@ cask:
   - atom
   - cheatsheet
   - coderunner
+  - docker
   - dash
   - firefox
   - dropbox

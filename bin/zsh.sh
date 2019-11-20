@@ -10,8 +10,18 @@ OMZ=$HOME/.oh-my-zsh
 YUM_CMD=$(which yum) 2> /dev/null
 if [[ ! -z $YUM_CMD ]]; then
     pecho "Updating your version of ZSH..."
-    sudo yum -y update --skip-broken || exit 1
-    sudo yum -y install zsh || exit 1
+
+    mkdir -p ~/Projects/zsh
+    cd ~/Projects/zsh
+    wget -O zsh.tar.xz https://sourceforge.net/projects/zsh/files/latest/download
+    tar -xf zsh.tar.xz
+    cd $(ls | grep -m 1 zsh)
+    ./configure --prefix="$HOME/local" \
+        CPPFLAGS="-I$HOME/local/include" \
+        LDFLAGS="-L$HOME/local/lib"
+    make -j
+    make install
+    mv $HOME/local/bin/zsh /bin/zsh
 fi
 
 # If omz is already present, we can delete it and do a clean install of it
@@ -22,7 +32,9 @@ if [[ -d ~/.oh-my-zsh ]]; then
     if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
         rm -rf ~/.oh-my-zsh
     fi
+fi
 
+if [[ ! -d ~/.oh-my-zsh ]]; then
     # Install oh-my-zsh
     pecho "Installing oh-my-zsh...\n"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -36,7 +48,7 @@ pecho "Installing spaceship...\n"
 clone https://github.com/denysdovhan/spaceship-prompt.git "$CUSTOM/themes/spaceship-prompt"
 
 pecho "Sym linking spaceship...\n"
-sudo ln -sf "$CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$CUSTOM/themes/spaceship.zsh-theme" || exit 1
+ln -sf "$CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$CUSTOM/themes/spaceship.zsh-theme" || exit 1
 
 # pecho "Installing spaceship from npm...\n"
 # npm install -g spaceship-prompt # || exit 1

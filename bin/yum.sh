@@ -30,7 +30,7 @@ for i in ${repos[*]}; do
 done
 
 pecho "Enabling all repos...\n"
-yum-config-manager --enable \*
+# yum-config-manager --enable \*
 
 pecho "Updating yum...\n"
 sudo yum check-update > /dev/null || true

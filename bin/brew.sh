@@ -3,6 +3,7 @@
 # configure
 set -e
 source bin/utils.sh || exit 1
+
 #
 # When you get confused about the yaml loops: https://github.com/jasperes/bash-yaml
 #

@@ -6,9 +6,9 @@ source bin/utils.sh || exit 1
 CUSTOM=$HOME/.oh-my-zsh/custom
 OMZ=$HOME/.oh-my-zsh
 
-# On CentOS we need to make sure we have the newest version of zsh
-YUM_CMD=$(which yum) 2> /dev/null
-if [[ ! -z $YUM_CMD ]]; then
+pecho "Do you want to update ZSH? You currently have $(zsh --version)? [y/N] "
+read -r response ; tput sgr0
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
     pecho "Updating your version of ZSH..."
 
     mkdir -p ~/Projects/zsh
@@ -27,7 +27,7 @@ fi
 # If omz is already present, we can delete it and do a clean install of it
 # Otherwise, let's just leave it be
 if [[ -d ~/.oh-my-zsh ]]; then
-    pecho "Would you like remove oh-my-zsh and start fresh [y/N] "
+    pecho "Would you like remove oh-my-zsh and start fresh? [y/N] "
     read -r response ; tput sgr0
     if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
         rm -rf ~/.oh-my-zsh

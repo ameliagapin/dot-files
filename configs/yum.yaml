@@ -35,3 +35,4 @@ packages:
   - node
   - tig
   - mosh
+  - neovim

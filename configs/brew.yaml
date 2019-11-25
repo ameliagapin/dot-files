@@ -93,6 +93,8 @@ packages:
     args: --
   - name: vim
     args: --with-override-system-vi
+  - name: neovim
+    args:
   - name: wget
     args: --
   - name: yarn

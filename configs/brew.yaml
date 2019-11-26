@@ -131,6 +131,7 @@ cask:
   - skype
   - sublime-text
   - vagrant
+  - tunnelblick
 
 mas:
   - 918858936 # Airmail 3

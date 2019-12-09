@@ -2,9 +2,6 @@ backports.functools-lru-cache
 backports.ssl-match-hostname
 bernhard
 bottle
-CouchDB
-docker
-docker-pycreds
 elasticsearch
 futures
 Glances

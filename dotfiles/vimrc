@@ -22,8 +22,6 @@ Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jszakmeister/vim-togglecursor'
-" Plug 'w0rp/ale'
-" Plug 'godlygeek/csapprox'
 Plug 'rking/ag.vim'
 Plug 'powerline/powerline-fonts'
 Plug 'luochen1990/rainbow'
@@ -62,7 +60,9 @@ set clipboard=unnamed
 set wildmenu
 
 " Allow cursor keys in insert mode
-set esckeys
+if !has('nvim')
+    set esckeys
+endif
 
 " Allow backspace in insert mode
 set backspace=indent,eol,start

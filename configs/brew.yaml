@@ -93,6 +93,8 @@ packages:
     args: --
   - name: vim
     args: --with-override-system-vi
+  - name: neovim
+    args:
   - name: wget
     args: --
   - name: yarn
@@ -112,6 +114,7 @@ cask:
   - atom
   - cheatsheet
   - coderunner
+  - docker
   - dash
   - firefox
   - dropbox
@@ -128,6 +131,7 @@ cask:
   - skype
   - sublime-text
   - vagrant
+  - tunnelblick
 
 mas:
   - 918858936 # Airmail 3

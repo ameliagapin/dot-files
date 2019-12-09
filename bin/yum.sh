@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-function pecho() {
-    local PRINT_COLOR=6
-    if [[ ! -z "$2" ]] ; then
-        PRINT_COLOR=$2
-    fi
-
-    echo -ne "$(tput setaf "${PRINT_COLOR}")$1$(tput sgr0)"
-}
-
 # configure
 set -e
 source bin/utils.sh || exit 1
@@ -30,7 +21,7 @@ for i in ${repos[*]}; do
 done
 
 pecho "Enabling all repos...\n"
-yum-config-manager --enable \*
+# yum-config-manager --enable \*
 
 pecho "Updating yum...\n"
 sudo yum check-update > /dev/null || true

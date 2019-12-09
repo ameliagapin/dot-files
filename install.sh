@@ -169,27 +169,14 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
 fi
 
 ###############################################################################
-# Update Vim plugins
+# VIM
 ###############################################################################
 
-pecho "Would you like to clean and install vim plugins [y/N] "
+pecho "Would you like to configue vim? [y/N] "
 read -r response ; tput sgr0
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
-    pecho "Cleaning/Installing/Updating Vim plugins:\n"
-
-    vim +PlugClean +PlugUpdate +PlugInstall +qall
-
-    pecho "Installing YouCompleteMe...\n"
-    cd ~/.vim/plugged/YouCompleteMe
-    $(which python3) ./install.py --all
-
-    pecho "Creating vim undo directory...\n"
-    mkdir -p ~/.vim/undo
-
-    pecho "Installing Go binaries...\n"
-    vim +GoInstallBinaries +qall
-
-    cd "${BASEDIR}"
+    echo "Configuring vim..."
+    bin/vim.sh || exit 1
 fi
 
 ###############################################################################
@@ -226,8 +213,8 @@ pecho "Would you like to configure zsh [y/N] "
 
 read -r response ; tput sgr0
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
-    echo "Configuring zsh:"
-    sudo bin/zsh.sh || exit 1
+    echo "Configuring zsh..."
+    bin/zsh.sh || exit 1
 
     # make default
     pecho "Setting zsh as default...\n"

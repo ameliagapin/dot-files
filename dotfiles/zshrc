@@ -133,5 +133,3 @@ fpath=($fpath "/root/.zfunctions")
 # Define navi cheatsheet locations. Kind of a hack
 export NAVI_PATH="$HOME/.cheatsheets:${_navi_path}/cheats"
 
-# Fire off neofetch
-# neofetch

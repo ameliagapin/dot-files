@@ -3,6 +3,23 @@ function mkd() {
 	mkdir -p "$@" && cd "$_";
 }
 
+# Clones a repo from Github into a given directory under ~/Projects
+function gclone() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: gclone ACCOUNT/REPO DIRECTORY"
+        exit 1
+    fi
+
+    git clone git@github.com/${1}.git ~/Projects/${2}
+    if [ $? -ne 0 ] ; then
+        echo "Something went wrong. I don't know what."
+        exit 1
+    fi
+
+    echo "Done!"
+    exit 0
+}
+
 # Change working directory to the top-most Finder window location
 function cdf() { # short for `cdfinder`
 	cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";

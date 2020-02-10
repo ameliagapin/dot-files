@@ -43,6 +43,8 @@ alias gpm="git pull origin master"
 alias gnb="git checkout -b"
 alias gcmp="git checkout master && git pull"
 
+# docker
+alias dcdangling="docker rmi \$(docker images -f \"dangling=true\" -q)"
 
 ###############################################################################
 # Other shit                                                                  #

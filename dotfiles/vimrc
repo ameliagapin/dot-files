@@ -29,7 +29,8 @@ Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 
 " Language support
-Plug 'fatih/vim-go', { 'tag': 'v1.18', 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go', {  'do': ':GoInstallBinaries' }
+"Plug 'fatih/vim-go', { 'tag': 'v1.18', 'do': ':GoInstallBinaries' }
 Plug 'lstinson/tclshell-vim', { 'for': 'tcl' }
 Plug 'kevinw/pyflakes-vim', { 'for': 'python' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
@@ -398,6 +399,7 @@ let g:go_fmt_command = "goimports"
 let g:go_decls_includes = "func,type" " Show funcs and types in declaration list
 nmap <leader>gi :GoInfo<CR>  " Show method signature for a Go method in status line
 nmap <leader>gd :GoDoc<CR>  " Show info for a Go method in scratch area
+
 " Highlighting - This may slow vim down
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1

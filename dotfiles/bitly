@@ -4,11 +4,11 @@
 # Bitly                                                                       #
 ###############################################################################
 
-export GOPATH=/root/gopath/go1.12.9:/root:/bitly:/bitly/local/go/site-packages/go1.12.9:$GOPATH
+export GOPATH=/root/gopath/go1.13.5:/root:/bitly:/bitly/local/go/site-packages/go1.13.5:$GOPATH
 export PATH=/bitly/local/bin:/usr/local/bin:/bitly/local/go/bin:$PATH
 
 bitgo=/etc/profile.d/go.sh
-if [ -f "$bitgo" ]; then
+if [[ -f "$bitgo" ]]; then
     source $bitgo
 fi
 

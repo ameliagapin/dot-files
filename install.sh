@@ -1,6 +1,5 @@
-#!/usr/bin/env bash
-
-# Automated installer for ameliagapin/dotfiles using dotbot (anishathalye/dotbot)
+#!/usr/bin/env bash 
+# Automated installer for ameliagapin/dotfiles using dotbot (anishathalye/dotbot) 
 
 source bin/utils.sh
 
@@ -18,6 +17,12 @@ read -r response ; tput sgr0
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
     echo "Installing dotbot:"
     git submodule add -f https://github.com/anishathalye/dotbot.git
+
+    if [ $? -eq 0 ]; then
+	echo "Cloning dotbot failed."
+	exit 1
+    fi
+    git submodule update --init --recursive "${DOTBOT_DIR}"
 else
     pecho "Would you like to update dotbot [y/N] "
     read -r response ; tput sgr0

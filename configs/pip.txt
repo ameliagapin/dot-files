@@ -43,4 +43,4 @@ urllib3
 websocket-client
 wifi
 zeroconf
---upgrade neovim
+neovim

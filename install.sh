@@ -16,13 +16,9 @@ pecho "Would you like to install dotbot [y/N] "
 read -r response ; tput sgr0
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
     echo "Installing dotbot:"
-    git submodule add -f https://github.com/anishathalye/dotbot.git
+    git clone --recursive https://github.com/anishathalye/dotbot.git
+    # git submodule add -f https://github.com/anishathalye/dotbot.git
 
-    if [ $? -eq 0 ]; then
-	echo "Cloning dotbot failed."
-	exit 1
-    fi
-    git submodule update --init --recursive "${DOTBOT_DIR}"
 else
     pecho "Would you like to update dotbot [y/N] "
     read -r response ; tput sgr0
@@ -101,38 +97,6 @@ if [[ "$OSTYPE" =~ ^darwin ]] ; then
 fi
 
 ###############################################################################
-# Set macOS System Prefs
-###############################################################################
-
-if [[ "$OSTYPE" =~ ^darwin ]] ; then
-    pecho "Would you like to set your computer name (as done via System Preferences >> Sharing)?  (y/N) "
-    read -r response ; tput sgr0
-    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-      pecho "What would you like it to be?"
-      read COMPUTER_NAME
-      sudo scutil --set ComputerName $COMPUTER_NAME
-      sudo scutil --set HostName $COMPUTER_NAME
-      sudo scutil --set LocalHostName $COMPUTER_NAME
-      sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
-    fi
-
-    pecho "Would you like to set macOS prefs? [y/N] "
-    read -r response ; tput sgr0
-    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
-        source configs/macos
-    fi
-
-    pecho "Would you like to set iTerm2 prefs? [y/N] "
-    read -r response ; tput sgr0
-    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
-        # Specify the preferences directory
-        defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iterm"
-        # Tell iTerm2 to use the custom preferences in the directory
-        defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
-    fi
-fi
-
-###############################################################################
 # Install npm packages
 ###############################################################################
 
@@ -177,11 +141,29 @@ fi
 # VIM
 ###############################################################################
 
-pecho "Would you like to configue vim? [y/N] "
+pecho "Would you like to configure vim? [y/N] "
 read -r response ; tput sgr0
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
     echo "Configuring vim..."
     bin/vim.sh || exit 1
+fi
+
+###############################################################################
+# Configure ZSH
+###############################################################################
+
+pecho "Would you like to configure zsh [y/N] "
+
+read -r response ; tput sgr0
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+    echo "Configuring zsh..."
+    bin/zsh.sh || exit 1
+
+    # make default
+    pecho "Setting zsh as default...\n"
+    # ensure shell is in /etc/shells
+    sudo sh -c "echo $(which zsh) >> /etc/shells"
+    chsh -s $(which zsh) || exit 1
 fi
 
 ###############################################################################
@@ -209,22 +191,38 @@ fi
 
 cd "${BASEDIR}"
 
-
 ###############################################################################
-# Configure ZSH
+# Set macOS System Prefs
 ###############################################################################
 
-pecho "Would you like to configure zsh [y/N] "
+if [[ "$OSTYPE" =~ ^darwin ]] ; then
+    pecho "Would you like to set your computer name (as done via System Preferences >> Sharing)?  (y/N) "
+    read -r response ; tput sgr0
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+      pecho "What would you like it to be?"
+      read COMPUTER_NAME
+      sudo scutil --set ComputerName $COMPUTER_NAME
+      sudo scutil --set HostName $COMPUTER_NAME
+      sudo scutil --set LocalHostName $COMPUTER_NAME
+      sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
+    fi
 
-read -r response ; tput sgr0
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
-    echo "Configuring zsh..."
-    bin/zsh.sh || exit 1
+    pecho "Would you like to set macOS prefs? [y/N] "
+    read -r response ; tput sgr0
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+        source configs/macos
+    fi
 
-    # make default
-    pecho "Setting zsh as default...\n"
-    chsh -s $(which zsh) || exit 1
+    pecho "Would you like to set iTerm2 prefs? [y/N] "
+    read -r response ; tput sgr0
+    if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
+        # Specify the preferences directory
+        defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iterm"
+        # Tell iTerm2 to use the custom preferences in the directory
+        defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+    fi
 fi
+
 
 ###############################################################################
 # Finish

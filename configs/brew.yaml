@@ -19,8 +19,6 @@ packages:
     args: --
   - name: coreutils
     args: --
-  - name: diff-so-fancy
-    args: --
   - name: findutils
     args: --
   - name: openssl

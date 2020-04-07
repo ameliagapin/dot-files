@@ -8,12 +8,8 @@ CONFIG=$1
 
 pecho "Updating pip...\n"
 pip3 install --upgrade pip
-pip2 install --upgrade pip
 
 pecho "Installing packages under Python3...\n"
-pip3 install -v --no-cache-dir -r $CONFIG > /dev/null || exit 1
-
-pecho "Installing packages under Python2...\n"
-pip install -v --no-cache-dir -r $CONFIG > /dev/null || exit 1
+pip3 install --upgrade -v --no-cache-dir -r $CONFIG > /dev/null || exit 1
 
 exit 0

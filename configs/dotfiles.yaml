@@ -21,7 +21,7 @@
     ~/.exports: dotfiles/exports
     ~/.aliases: dotfiles/aliases
     ~/.tmux.conf: dotfiles/tmux.conf
-    ~/.bitly: dotfiles/bitly
+    ~/.hinge: dotfiles/hinge
     ~/.iterm: dotfiles/iterm
     ~/.tmuxp: dotfiles/tmuxp
     ~/.cheatsheets: dotfiles/cheatsheets

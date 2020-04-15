@@ -1,8 +1,13 @@
 # GO
-export GOPATH=$GOPATH:$HOME/Projects/go:$HOME/go
+
+export GOROOT=/usr/local/go
+
+export GOPATH=$HOME/Projects/go
+
+export GOBIN=$GOPATH/bin
 
 # PATH
-export PATH=$PATH:$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/usr/local/go/bin:$HOME/Projects/go/bin:$GOPATH/bin
+export PATH=$PATH:$GOROOT:$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:$HOME/Projects/go/bin:$GOPATH/bin
 
 # export nvm
 export NVM_DIR="$HOME/.nvm"

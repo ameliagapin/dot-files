@@ -115,6 +115,7 @@ cask:
   - docker
   - dash
   - firefox
+  - flotato
   - dropbox
   - github
   - google-chrome
@@ -130,6 +131,8 @@ cask:
   - sublime-text
   - vagrant
   - tunnelblick
+  - visual-studio-code
+  - discord
 
 mas:
   - 918858936 # Airmail 3

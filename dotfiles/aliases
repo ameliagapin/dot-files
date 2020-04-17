@@ -17,6 +17,7 @@ alias dropbox="cd ~/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias pj="cd ~/Projects"
+alias dotfiles="~/Projects/dotfiles"
 
 # aliases
 alias p="vim ~/.zshrc"

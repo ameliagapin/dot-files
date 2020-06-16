@@ -23,11 +23,13 @@ export PROMPT_EOL_MARK=''
 ZSH_THEME="spaceship"
 
 # Spaceship settings
+# https://github.com/denysdovhan/spaceship-prompt/blob/master/docs/Options.md
 SPACESHIP_PROMPT_ORDER=(
     time
     user
     host
     dir
+    kubectl
     git
     exit_code
     line_sep
@@ -55,14 +57,19 @@ SPACESHIP_GIT_STATUS_RENAMED=""
 SPACESHIP_GIT_STATUS_DELETED=""
 SPACESHIP_GIT_STATUS_STASHED=""
 SPACESHIP_GIT_STATUS_DIVERGED=""
+SPACESHIP_KUBECTL_SHOW="true"
+SPACESHIP_KUBECTL_SYMBOL=""
+SPACESHIP_KUBECTL_VERSION_SHOW="false"
+SPACESHIP_KUBECTL_SUFFIX=""
 
 # Spaceship colors
+# https://jonasjacek.github.io/colors/
 SPACESHIP_TIME_COLOR="009"
 SPACESHIP_USER_COLOR="010"
 SPACESHIP_HOST_COLOR="011"
 SPACESHIP_DIR_COLOR="013"
 SPACESHIP_GIT_BRANCH_COLOR="014"
-
+SPACESHIP_KUBECONTEXT_COLOR="001"
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS=true
@@ -92,10 +99,9 @@ plugins=(
     git
     zsh-syntax-highlighting
     zsh-autosuggestions
-    navi
+    # navi
     docker
     gcloud
-    go
     osx
 )
 
@@ -133,6 +139,8 @@ fpath=($fpath "/root/.zfunctions")
 
 # fzf - needed for navi to work
  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Define navi cheatsheet locations. Kind of a hack
 export NAVI_PATH="$HOME/.cheatsheets:${_navi_path}/cheats"
+source <(navi widget zsh)
 

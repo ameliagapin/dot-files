@@ -38,11 +38,12 @@ alias vs="vagrant ssh"
 # git
 alias gdelmerged="git branch --merged | grep -v \* | grep -v '^\s*master$' | grep -v '^\s*develop$' | xargs -t -n 1 git branch -d"
 alias gp='git pull'
+alias gpr='git pull --rebase'
 alias gc="git checkout"
 alias gcm="git checkout master"
 alias gpm="git pull origin master"
 alias gnb="git checkout -b"
-alias gcmp="git checkout master && git pull"
+alias grbm="git checkout master && git pull --rebase"
 
 # docker
 alias dcdangling="docker rmi \$(docker images -f \"dangling=true\" -q)"
@@ -61,10 +62,10 @@ else # macOS `ls`
 fi
 
 # List all files colorized in long format
-alias l="ls -lF ${colorflag}"
+alias l="ls -lFh ${colorflag}"
 
 # List all files colorized in long format, including dot files
-alias la="ls -laF ${colorflag}"
+alias la="ls -laFh ${colorflag}"
 
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"

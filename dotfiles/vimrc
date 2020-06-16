@@ -30,7 +30,6 @@ Plug 'mattn/gist-vim'
 
 " Language support
 Plug 'fatih/vim-go', {  'do': ':GoInstallBinaries' }
-"Plug 'fatih/vim-go', { 'tag': 'v1.18', 'do': ':GoInstallBinaries' }
 Plug 'lstinson/tclshell-vim', { 'for': 'tcl' }
 Plug 'kevinw/pyflakes-vim', { 'for': 'python' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
@@ -113,7 +112,7 @@ set number
 syntax on
 
 " Highlight current line
-set cursorline
+" set cursorline
 
 " Highlight a certain column
 set colorcolumn=100
@@ -314,27 +313,42 @@ highlight User1
 nmap <C-n> :NERDTreeToggle<CR>  " Map toggle to crtl-n
 nmap <C-m> :NERDTreeFind<CR>   " Map show current file to ctrl-m
 let NERDTreeShowHidden=1       " Show hidden files
+let NERDTreeQuitOnOpen = 1      " Close after opening file
 " Better color for directories
 autocmd VimEnter,ColorScheme * :hi Directory guifg=#FF0000 ctermfg=red
 " Close vim if nerdtree is the only window open
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
 
 "
 " Ale - linting
 "
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
-highlight ALEErrorSign cterm=NONE ctermfg=black ctermbg=yellow
-highlight clear ALEWarningSign
-let g:ale_sign_column_always = 1
-let g:airline#extensions#ale#enabled = 1
-nmap <silent> <C-S-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-S-l> <Plug>(ale_next_wrap)
-let g:ale_linters = {
-\   'python': ['pep8'],
-\}
+"let g:ale_sign_error = '>>'
+"let g:ale_sign_warning = '--'
+"highlight ALEErrorSign cterm=NONE ctermfg=black ctermbg=yellow
+"highlight clear ALEWarningSign
+"let g:ale_sign_column_always = 1
+"let g:airline#extensions#ale#enabled = 1
+"nmap <silent> <C-S-k> <Plug>(ale_previous_wrap)
+"nmap <silent> <C-S-l> <Plug>(ale_next_wrap)
+"let g:ale_linters = {
+"\   'python': ['pep8'],
+"\}
 
 "
 " Airline
@@ -419,5 +433,5 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 
 " Override error highlighing color
 " Something above is setting ctermfg=white which is unreadable
-" This fixes it, but I should probably figure out what is setting it:w
+" This fixes it, but I should probably figure out what is setting it
 highlight SpellBad ctermbg=red ctermfg=black

@@ -3,7 +3,7 @@
 ###############################################################################
 [user]
 	email = amelia@entirelyamelia.com
-	name = amelia
+	name = amelia gapin
 
 [github]
     user = ameliagapin
@@ -181,6 +181,9 @@
 [url "git://github.com/"]
 
 	insteadOf = "github:"
+
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
 
 [url "git@gist.github.com:"]
 

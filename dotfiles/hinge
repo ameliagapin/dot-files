@@ -1,6 +1,18 @@
 
 alias hinge='cd ~/Projects/backend'
 
+alias kc=kubectl
+# alias dev-1="aws eks update-kubeconfig --name dev-ue1-eks-01"
+# alias dev-2="aws eks update-kubeconfig --name dev-ue1-eks-02"
+# alias prod-1="aws eks update-kubeconfig --name prod-eks-01 --profile hinge-prod"
+# alias prod-2="aws eks update-kubeconfig --name prod-eks-02 --profile hinge-prod"
+
+alias dev-1="aws-profile hinge-dev && kubectl config use-context dev-ue1-eks-01"
+alias dev-2="aws-profile hinge-dev && kubectl config use-context dev-ue1-eks-02"
+alias prod-1="aws-profile hinge-prod && kubectl config use-context prod-eks-01"
+alias prod-2="aws-profile hinge-prod && kubectl config use-context prod-eks-02"
+alias login-ecr="aws ecr get-login-password | docker login --username AWS --password-stdin https://605210442326.dkr.ecr.us-east-1.amazonaws.com"
+
 export AWS_DEFAULT_PROFILE="hinge-dev"
 export AWS_PROFILE=$AWS_DEFAULT_PROFILE
 export AWS_DEFAULT_REGION="us-east-1"
@@ -26,7 +38,44 @@ aws_region_shortname=(
     [us-east-2]="ue2"
     [us-west-1]="uw1"
     [us-west-2]="uw2"
+    [ap-east-1]="ae1"
+    [ap-south-1]="as1"
+    [ap-northeast-2]="an2"
+    [ap-southeast-1]="as1"
+    [ap-southeast-2]="as2"
+    [ap-northeast-1]="an1"
+    [ca-central-1]="cc1"
+    [eu-central-1]="ec1"
+    [eu-west-1]="ew1"
+    [eu-west-2]="ew2"
+    [eu-west-3]="ew3"
+    [eu-north-1]="en1"
+    [me-south-1]="ms1"
+    [sa-east-1]="se1"
 )
+
+#  Usage: aws-instances [filter]
+aws-instances() {
+    if [ $# -eq 0 ]; then
+        aws ec2 describe-instances --output table                                                                               \
+            --query 'Reservations[].Instances[].[InstanceId,Tags[?Key==`Name`] | [0].Value,PrivateIpAddress, State.Name]'
+    else
+        aws ec2 describe-instances --output table                                                                               \
+            --query 'Reservations[].Instances[].[InstanceId,Tags[?Key==`Name`] | [0].Value,PrivateIpAddress, State.Name]'       \
+            --filters "Name=tag:Name,Values=*${1}*"
+    fi
+}
+
+# Usage: aws-connect instance-id
+aws-connect() {
+    if [ $# -ne 1 ]; then
+        echo "aws-connect instance-id"
+    elif [[ $1 == i-* ]]; then
+        aws ssm start-session --target $1
+    else
+        echo "Invalid instance id"
+    fi
+}
 
 # Usage: aws-profile [name] [region]
 aws-profile() {
@@ -65,6 +114,76 @@ aws-profile() {
             else
                 echo "Invalid region: $2, ignored"
             fi
+        fi
+    fi
+}
+
+# The following functions are a simplier and smaller version of `kubectx`
+# Source https://github.com/ahmetb/kubectx
+
+# Usage: kc-ctx [context]
+kc-ctx() {
+    local yellow=$(tput setaf 3 || true)
+    local darkbg=$(tput setab 0 || true)
+    local normal=$(tput sgr0 || true)
+
+    if [ $# -eq 0 ]; then
+        local current_ctx=$(kubectl config view -o=jsonpath='{.current-context}')
+        local ctx_list=$(kubectl config get-contexts -o=name | sort -n)
+
+        for c in $ctx_list; do
+            if [ "$current_ctx" = "$c" ]; then
+                echo "${darkbg}${yellow}${c}${normal}"
+            else
+                echo $c
+            fi
+        done
+    else
+        if kubectl config get-contexts -o=name | grep -q "^${1}$"; then
+            kubectl config use-context $1 > /dev/null
+            echo "Switched to context: $1"
+        else
+            echo "Invalid context: $1"
+        fi
+    fi
+}
+
+kc-ctx-unset() {
+    kubectl config unset current-context > /dev/null
+}
+
+# Usage: kc-ctx-renamce old new
+kc-ctx-rename() {
+    if [ $# -ne 2 ]; then
+        echo "kc-ctx-rename old new"
+    else
+        kubectl config rename-context "$1" "$2"
+    fi
+}
+
+# Usage: kc-ns [namespace]
+kc-ns() {
+    local yellow=$(tput setaf 3 || true)
+    local darkbg=$(tput setab 0 || true)
+    local normal=$(tput sgr0 || true)
+
+    local current_ctx=$(kubectl config view -o=jsonpath='{.current-context}')
+    local current_ns=$(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${current_ctx}\")].context.namespace}")
+
+    if [ $# -eq 0 ]; then
+        for n in $(kubectl get namespaces -o=jsonpath='{range .items[*].metadata.name}{@}{"\n"}{end}'); do
+            if [ "$current_ns" = "$n" ]; then
+                echo "${darkbg}${yellow}${n}${normal}"
+            else
+                echo $n
+            fi
+        done
+    else
+        if kubectl get namespaces -o=jsonpath='{range .items[*].metadata.name}{@}{"\n"}{end}' | grep -q "^${1}$"; then
+            kubectl config set-context $current_ctx --namespace $1 > /dev/null
+            echo "Switched to namespace: $1"
+        else
+            echo "Invalid namespace: $1"
         fi
     fi
 }

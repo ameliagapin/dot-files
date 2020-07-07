@@ -2,16 +2,66 @@
 alias hinge='cd ~/Projects/backend'
 
 alias kc=kubectl
-# alias dev-1="aws eks update-kubeconfig --name dev-ue1-eks-01"
-# alias dev-2="aws eks update-kubeconfig --name dev-ue1-eks-02"
-# alias prod-1="aws eks update-kubeconfig --name prod-eks-01 --profile hinge-prod"
-# alias prod-2="aws eks update-kubeconfig --name prod-eks-02 --profile hinge-prod"
 
 alias dev-1="aws-profile hinge-dev && kubectl config use-context dev-ue1-eks-01"
 alias dev-2="aws-profile hinge-dev && kubectl config use-context dev-ue1-eks-02"
+alias qa-1="aws-profile hinge-dev && kubectl config use-context qa-ue1-eks-01"
+alias internal-1="aws-profile hinge-dev && kubectl config use-context dev-ue1-eks-internal-01"
 alias prod-1="aws-profile hinge-prod && kubectl config use-context prod-eks-01"
 alias prod-2="aws-profile hinge-prod && kubectl config use-context prod-eks-02"
 alias login-ecr="aws ecr get-login-password | docker login --username AWS --password-stdin https://605210442326.dkr.ecr.us-east-1.amazonaws.com"
+
+
+get_pods() {
+    kubectl get pods -n $1 -l app=$2
+    return $?
+}
+
+# get for a service in the current context. will check hinge-services and hinge-data
+hpods() {
+    get_pods hinge-services $1
+    get_pods hinge-data $1
+    return 0
+}
+
+# get the ip address of a service in the current context. will check hinge-services and hinge-data
+hip() {
+    IP=$(kubectl get pods -n hinge-services -l app=$1 -o jsonpath='{.items[0].status.podIP}' 2>/dev/null )
+    if [ $? -eq 0 ]; then
+        echo $IP
+        return 0
+    fi
+
+    IP=$(kubectl get pods -n hinge-data -l app=$1 -o jsonpath='{.items[0].status.podIP}' 2>/dev/null )
+    if [ $? -eq 0 ]; then
+        echo $IP
+        return 0
+    fi
+
+    return 1
+}
+
+# connect to postgres instance for current context
+# must provide the name of the service to pull secrets from
+hpg() {
+    PG_PASSWORD=$(kc -n hinge-services get secret secret-$1 -o json | jq -r '.data["PG_PASSWORD"]' | base64 --decode)
+    PG_HOST=$(kc -n hinge-services get cm $1 -o json | jq -r '.data["PG_HOST"]')
+    pgcli --less-chatty --warn  "postgres://hinge:$PG_PASSWORD@$PG_HOST:5432/hingedb"
+}
+
+# connect to dev mongo
+hmongo() {
+    mongo mongodb://dev-ue1-mongodb-03.hingedev.net
+}
+
+
+#########################################################################################################
+#
+# Stuff from Notion
+# https://www.notion.so/hinge/HowTos-ef81beb370ed4e59ade1c2accd569bdd
+#
+#########################################################################################################
+
 
 export AWS_DEFAULT_PROFILE="hinge-dev"
 export AWS_PROFILE=$AWS_DEFAULT_PROFILE

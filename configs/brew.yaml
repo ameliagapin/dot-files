@@ -3,6 +3,7 @@ tap:
   - homebrew/bundle
   - homebrew/cask
   - homebrew/core
+  - mongodb/brew
 
 packages:
   - name: zsh
@@ -106,6 +107,12 @@ packages:
   - name: docker
     args:
   - name: docker-machine
+    args:
+  - name: stern
+    args:
+  - name: mongodb-community-shell
+    args:
+  - name: jesseduffield/lazydocker/lazydocker
     args:
 
 cask:

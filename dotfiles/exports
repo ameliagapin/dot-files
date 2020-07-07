@@ -7,7 +7,8 @@ export GOPATH=$HOME/Projects/go
 export GOBIN=$GOPATH/bin
 
 # PATH
-export PATH=$PATH:$GOROOT:$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:$HOME/Projects/go/bin:$GOPATH/bin
+# export PATH=$PATH:$GOROOT:$HOME/bin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:$HOME/Projects/go/bin:$GOPATH/bin
+export PATH=$PATH:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:$HOME/bin:$GOBIN:$GOROOT/bin
 
 # export nvm
 export NVM_DIR="$HOME/.nvm"

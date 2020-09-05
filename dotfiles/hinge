@@ -37,7 +37,7 @@ hpg() {
 
 # connect to dev mongo
 hmongo() {
-    mongo mongodb://dev-ue1-mongodb-03.hingedev.net
+    mongo mongodb://dev-ue1-mongodb-01.hingedev.net
 }
 
 # Shortcut to deploy a service to dev

@@ -114,6 +114,8 @@ packages:
     args:
   - name: jesseduffield/lazydocker/lazydocker
     args:
+  - name: bat
+    args:
 
 cask:
   - atom

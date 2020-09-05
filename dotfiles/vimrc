@@ -13,27 +13,31 @@ endfunction
 
 call plug#begin()
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
-"Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jszakmeister/vim-togglecursor'
-Plug 'rking/ag.vim'
 Plug 'powerline/powerline-fonts'
 Plug 'luochen1990/rainbow'
-Plug 'mattn/webapi-vim'
-Plug 'mattn/gist-vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Language support
 Plug 'fatih/vim-go', {  'do': ':GoInstallBinaries' }
-Plug 'lstinson/tclshell-vim', { 'for': 'tcl' }
 Plug 'kevinw/pyflakes-vim', { 'for': 'python' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+
+" older plugins that I don't use anymore
+" Plug 'rking/ag.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'scrooloose/nerdcommenter'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'mattn/webapi-vim'
+"Plug 'mattn/gist-vim'
+"Plug 'lstinson/tclshell-vim', { 'for': 'tcl' }
 call plug#end()
 
 " Turn off line wrapping
@@ -113,7 +117,7 @@ set number
 syntax on
 
 " Highlight current line
-" set cursorline
+set cursorline
 
 " Highlight a certain column
 set colorcolumn=100
@@ -228,12 +232,6 @@ autocmd FileChangedShellPost *
 hi Search cterm=NONE ctermfg=black ctermbg=yellow
 hi Visual cterm=NONE ctermfg=black ctermbg=yellow
 
-" provide hjkl movements in Insert mode via the <Alt> modifier key
-inoremap <A-h> <C-o>h
-inoremap <A-j> <C-o>j
-inoremap <A-k> <C-o>k
-inoremap <A-l> <C-o>l
-
 map <C-L> 20zl " Scroll 20 characters to the right
 map <C-H> 20zh " Scroll 20 characters to the left
 
@@ -244,28 +242,35 @@ map <C-w> <C-w><C-w>
 noremap <C-j> :bnext<cr>
 noremap <C-k> :bprevious<cr>
 
-" ----------------------------------------------------------------------
-" | Use The Silver Searcher                                            |
-" ----------------------------------------------------------------------
-" command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Ag -C<SPACE>
-let g:ackprg = 'ag --nogroup --nocolor --column'
+" Allow switching buffers without saving
+set hidden
 
 " ----------------------------------------------------------------------
 " | Helper Functions                                                   |
 " ----------------------------------------------------------------------
 
 function! GetGitBranchName()
-
     let branchName = ""
-
     if exists("g:loaded_fugitive")
         let branchName = "[" . fugitive#head() . "]"
     endif
-
     return branchName
-
 endfunction
+
+" Writing mode
+function! Writer()
+    setlocal spell spelllang=en_us
+    setlocal formatoptions=t1
+    setlocal noautoindent
+    setlocal shiftwidth=5
+    setlocal tabstop=5
+    setlocal expandtab
+    setlocal wrap
+    " Move by display line instead of physical line when lines are wrapped
+    noremap <buffer> j gj
+    noremap <buffer> k gk
+endfunction
+com! WR call Writer()
 
 " ----------------------------------------------------------------------
 " | Status Line                                                        |
@@ -317,8 +322,6 @@ let NERDTreeShowHidden=1       " Show hidden files
 let NERDTreeQuitOnOpen = 1      " Close after opening file
 " Better color for directories
 autocmd VimEnter,ColorScheme * :hi Directory guifg=#FF0000 ctermfg=red
-" Close vim if nerdtree is the only window open
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 let NERDTreeMinimalUI = 1
@@ -337,45 +340,16 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 "
-" Ale - linting
-"
-"let g:ale_sign_error = '>>'
-"let g:ale_sign_warning = '--'
-"highlight ALEErrorSign cterm=NONE ctermfg=black ctermbg=yellow
-"highlight clear ALEWarningSign
-"let g:ale_sign_column_always = 1
-"let g:airline#extensions#ale#enabled = 1
-"nmap <silent> <C-S-k> <Plug>(ale_previous_wrap)
-"nmap <silent> <C-S-l> <Plug>(ale_next_wrap)
-"let g:ale_linters = {
-"\   'python': ['pep8'],
-"\}
-
-"
 " Airline
 "
 let g:airline#extensions#tabline#enabled = 1
-" let g:airline_powerline_fonts = 1
 " Show buffer numbers next to buffer names
 let g:airline#extensions#tabline#buffer_nr_show = 1
-" let g:airline_theme='afterglow'
 
 "
 " Rainbow Parentheses
 "
 let g:rainbow_active = 1
-
-"
-" NERDCommenter
-"
-" Add spaces after comment delimiters
-let g:NERDSpaceDelims = 1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
 
 "
 " Indent Guides
@@ -388,21 +362,36 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233 " #121212
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=233
 
-"
-" Rainbow
-"
-let g:rainbow_active = 1
 
 "
-" CtrlP
+" fzf
 "
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)|node_modules$'
-noremap <C-b> :CtrlPBuffer<cr>
+" user silver searcher and ignore vendor for because the vendor folder may be not be in gitignore if go.mod is set to vendor files
+let $FZF_DEFAULT_COMMAND='ag --ignore-dir="vendor" -g ""'
+" bind for searching project
+nmap \ :Ag<SPACE>
+" ignore vendor for silver searcher because the vendor folder may be not be in gitignore if go.mod is set to vendor files
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--ignore-dir="vendor"', fzf#vim#with_preview())
+" Bind // to show all lines in current buffer matching search
+nmap // :BLines<CR>
+" Bind /// to show all lines in all buffers matching search
+nmap /// :Lines<CR>
+" Bind ctrl-p to a fzf-powered filename search
+nmap <C-p> :Files<CR>
+" Bind ctrl=b to Buffers
+nmap <C-b> :Buffers<cr>
+" Bind cc to a fzf-powered command search
+nmap <C-c> :Commands<CR>
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
+"
+" vim-gitgutter
+"
+highlight! link SignColumn LineNr
+highlight GitGutterAdd    guifg=#009900 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 
 "
 " vimgo

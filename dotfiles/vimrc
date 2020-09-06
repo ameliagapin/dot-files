@@ -28,6 +28,7 @@ Plug 'powerline/powerline-fonts'
 Plug 'luochen1990/rainbow'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-commentary' " Provides easy commenting using gcc and gc
 
 " Language support
 Plug 'fatih/vim-go', {  'do': ':GoInstallBinaries' }
@@ -273,6 +274,17 @@ function! Writer()
     noremap <buffer> k gk
 endfunction
 com! WR call Writer()
+
+
+" ----------------------------------------------------------------------
+" | Shortcut commands                                                  |
+" ----------------------------------------------------------------------
+
+" :RC to open ~/.vimrc
+com! RC e ~/.vimrc
+
+" :S to source ~/.vimrc
+com! S source ~/.vimrc
 
 " ----------------------------------------------------------------------
 " | Status Line                                                        |

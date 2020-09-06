@@ -27,6 +27,8 @@ alias s="source ~/.zshrc"
 # Applications                                                                #
 ###############################################################################
 
+alias nv='nvim'
+
 # mysql
 alias mysql=/usr/local/bin/mysql
 alias mysqladmin=/usr/local/mysql/bin/mysqladmin

@@ -103,6 +103,7 @@ plugins=(
     docker
     gcloud
     osx
+    fzf
 )
 
 source $ZSH/oh-my-zsh.sh

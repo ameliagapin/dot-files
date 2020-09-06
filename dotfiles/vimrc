@@ -1,3 +1,7 @@
+" Use python3 when available
+if has('python3')
+endif
+
 " Vim Plug automatic installation
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fsLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com /junegunn/vim-plug/master/plug.vim
@@ -209,24 +213,22 @@ noremap <leader>ss :call StripWhitespace()<CR>
 " Save a file as root (,W)
 noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
-" Strip whitespace on write for certain files
-autocmd BufWritePre *.php,*.js,*.scss,*.css,*.tpl,*.html :%s/\s\+$//e
-
 " Automatic commands
 if has("autocmd")
+    " Strip whitespace on write for certain files
+    autocmd BufWritePre *.php,*.js,*.scss,*.css,*.tpl,*.html,*.go :%s/\s\+$//e
     " Enable file type detection
     filetype plugin indent on
     " Treat .json files as .js
     autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
     " Treat .md files as Markdown
     autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+    " Autoreload files changed outside of buffer
+    autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+    " Notification after file change
+    autocmd FileChangedShellPost *
+       \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl Nonei
 endif
-
-" Autoreload files changed outside of buffer
-autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
-" Notification after file change
-autocmd FileChangedShellPost *
-   \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl Nonei
 
 " Better search and selection highlighting
 hi Search cterm=NONE ctermfg=black ctermbg=yellow

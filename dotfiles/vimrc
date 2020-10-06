@@ -99,6 +99,7 @@ if exists("&undodir")
     set undofile " Maintain undo history between sessions
     set undodir=~/.vim/undo
 endif
+set undolevels=1000
 
 " Don’t create backups when editing files in certain directories
 set backupskip=/tmp/*,/private/tmp/*
@@ -125,20 +126,27 @@ syntax on
 set cursorline
 
 " Highlight a certain column
-set colorcolumn=100
+set colorcolumn=80,120
 
+"
 " Indents, Tabs/Spaces
+"
 set autoindent    " If you're indented, new lines will also be indented
-" set smartindent   " Automatically indents l`ines after opening a bracket in programming languages
+set smartindent   " Automatically indents lines after opening a bracket in programming languages
 set expandtab     " Inserts spaces when tab is hit
 set tabstop=4     " How much space Vim gives to a tab
 set smarttab      " Improves tabbing
 set shiftwidth=4  " Number of spaces when indenting
 set softtabstop=4 " Don't think I need this in combo with the other options
+" Some filetypes only get two spaces
+autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab 
+autocmd Filetype html setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd Filetype css setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " Show “invisible” characters
-set lcs=tab:▸\ ,trail:·,nbsp:_
 set list
+set listchars=tab:→\ ,trail:·,nbsp:·
 
 " Highlight searches
 set hlsearch
@@ -230,6 +238,10 @@ if has("autocmd")
     autocmd FileChangedShellPost *
        \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl Nonei
 endif
+
+" Wildignore
+set wildignore+=*.pyc,*.pyo,*/__pycache__/*
+set wildignore+=*.DS_Store
 
 " Better search and selection highlighting
 hi Search cterm=NONE ctermfg=black ctermbg=yellow
@@ -352,6 +364,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ 'Ignored'   : '☒',
     \ "Unknown"   : "?"
     \ }
+nmap <Enter> <Esc> " For some reason in neovim, <Enter> opens NERDTree in normal mode and I hate this
 
 "
 " Airline
@@ -411,7 +424,7 @@ highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 " vimgo
 "
 let g:go_auto_sameids = 1 " Auto higlight all references to symbol under the cursor
-set updatetime=200 " Update status line info every 100ms
+set updatetime=500 " Update status line info every 100ms
 let g:go_auto_type_info = 1 " Automatically show type info in status line for type under cursor
 let g:go_fmt_command = "goimports"
 let g:go_decls_includes = "func,type" " Show funcs and types in declaration list
@@ -428,6 +441,8 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
+
+nmap <leader>gt :GoAddTags<CR>  " Generate go stuct tags
 
 "
 " YouCompleteMe

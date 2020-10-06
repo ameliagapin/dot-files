@@ -40,6 +40,11 @@ hmongo() {
     mongo mongodb://dev-ue1-mongodb-01.hingedev.net
 }
 
+# connect to dev mongo
+hdocdb() {
+    mongo mongodb://dev-ue1-docdb-01-cluster.cluster-cj1nn6g7xsbg.us-east-1.docdb.amazonaws.com
+}
+
 # Shortcut to deploy a service to dev
 # Usage: dev <SERVICE>
 dev() {
@@ -53,6 +58,18 @@ dev() {
     return $?
 }
 
+get_hinge_token() {
+    INSTALL_DATA=$(kubectl -n hinge-services get cm auth -o json | jq '.data')
+    INSTALL_SECRETS=$(kubectl -n hinge-services get secret secret-auth -o json | jq '.data')
+    PG_PASSWORD=$(echo $INSTALL_SECRETS | jq -r '.PG_PASSWORD | @base64d')
+    PG_HOST=$(echo $INSTALL_DATA | jq -r '.PG_HOST')
+    REDIS_CACHE=$(echo $INSTALL_DATA | jq -r '.REDIS_INSTALL_HOST' | cut -f1 -d":")
+    INSTALL_ID=$(psql -X -A "postgres://hinge:$PG_PASSWORD@$PG_HOST:5432/hingedb" -c "select id from public.install where uid = '$1' limit 1" | sed '1d;$d')
+    REDIS_PASSWORD=$(echo $INSTALL_SECRETS | jq -r '.CACHE_TOKEN | @base64d')
+    HINGE_TOKEN=$(redis-cli -h $REDIS_CACHE -p 6379 --no-auth-warning -a $REDIS_PASSWORD -c --tls HMGET "install:$INSTALL_ID" PlaintextToken | awk '{print $1}')
+    echo "INSTALL_ID=$INSTALL_ID"
+    echo "HINGE_TOKEN=$HINGE_TOKEN"
+}
 
 #########################################################################################################
 #
@@ -61,6 +78,7 @@ dev() {
 #
 #########################################################################################################
 
+export VAULT_ADDR="https://dev-ue1-vault.hingedev.net"
 
 export AWS_DEFAULT_PROFILE="hinge-dev"
 export AWS_PROFILE=$AWS_DEFAULT_PROFILE

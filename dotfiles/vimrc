@@ -17,6 +17,7 @@ endfunction
 
 call plug#begin()
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -32,17 +33,13 @@ Plug 'tpope/vim-commentary' " Provides easy commenting using gcc and gc
 
 " Language support
 Plug 'fatih/vim-go', {  'do': ':GoInstallBinaries' }
+Plug 'buoto/gotests-vim'
 Plug 'kevinw/pyflakes-vim', { 'for': 'python' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 
 " older plugins that I don't use anymore
 " Plug 'rking/ag.vim'
-"Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'scrooloose/nerdcommenter'
-"Plug 'Xuyuanp/nerdtree-git-plugin'
-"Plug 'mattn/webapi-vim'
-"Plug 'mattn/gist-vim'
-"Plug 'lstinson/tclshell-vim', { 'for': 'tcl' }
+" Plug 'mattn/gist-vim'
 call plug#end()
 
 " Turn off line wrapping
@@ -206,9 +203,6 @@ set showcmd
 " Start scrolling three lines before the horizontal window border
 set scrolloff=3
 
-" Set the spellchecking language.
-set spelllang=en_us
-
 " Strip trailing whitespace (,ss)
 function! StripWhitespace()
     let save_cursor = getpos(".")
@@ -341,30 +335,22 @@ highlight User1
 "
 " NERDTree
 "
-" autocmd VimEnter * wincmd p    " Have cursor start in file window
 nmap <C-n> :NERDTreeToggle<CR>  " Map toggle to crtl-n
-nmap <C-m> :NERDTreeFind<CR>   " Map show current file to ctrl-m
+nmap <S-n> :NERDTreeFind<CR>   " Map show current file to ctrl-m
 let NERDTreeShowHidden=1       " Show hidden files
-let NERDTreeQuitOnOpen = 1      " Close after opening file
+let NERDTreeQuitOnOpen=1      " Close after opening file
 " Better color for directories
 autocmd VimEnter,ColorScheme * :hi Directory guifg=#FF0000 ctermfg=red
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
+let g:NERDTreeGitStatusConcealBrackets = 1
+
 nmap <Enter> <Esc> " For some reason in neovim, <Enter> opens NERDTree in normal mode and I hate this
+" Open NerdTree on vim start
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd VimEnter * wincmd p    " Have cursor start in file window
+"
 
 "
 " Airline

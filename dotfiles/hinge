@@ -7,8 +7,9 @@ alias dev-1="aws-profile hinge-dev && kubectl config use-context dev-ue1-eks-01"
 alias dev-2="aws-profile hinge-dev && kubectl config use-context dev-ue1-eks-02"
 alias qa-1="aws-profile hinge-dev && kubectl config use-context qa-ue1-eks-01"
 alias internal-1="aws-profile hinge-dev && kubectl config use-context dev-ue1-eks-internal-01"
-alias prod-1="aws-profile hinge-prod && kubectl config use-context prod-eks-01"
-alias prod-2="aws-profile hinge-prod && kubectl config use-context prod-eks-02"
+alias prod-1="aws-profile hinge-prod && kubectl config use-context prod-ue1-eks-01"
+alias prod-2="aws-profile hinge-prod && kubectl config use-context prod-ue1-eks-02"
+alias prod-old="aws-profile prod && kubectl config use-context prod-eks-01"
 alias login-ecr="aws ecr get-login-password | docker login --username AWS --password-stdin https://605210442326.dkr.ecr.us-east-1.amazonaws.com"
 
 

@@ -17,7 +17,7 @@ endfunction
 
 call plug#begin()
 Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -345,7 +345,6 @@ autocmd StdinReadPre * let s:std_in=1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeGitStatusConcealBrackets = 1
-
 nmap <Enter> <Esc> " For some reason in neovim, <Enter> opens NERDTree in normal mode and I hate this
 " Open NerdTree on vim start
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif

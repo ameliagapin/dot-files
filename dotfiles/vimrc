@@ -1,6 +1,8 @@
 " Use python3 when available
+
 if has('python3')
 endif
+
 
 " Vim Plug automatic installation
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -22,7 +24,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'jszakmeister/vim-togglecursor'
 Plug 'powerline/powerline-fonts'
@@ -32,6 +33,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary' " Provides easy commenting using gcc and gc
 
 " Language support
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-json coc-tsserver coc-sh coc-go coc-html coc-python coc-sql coc-docker coc-phpls '}
 Plug 'fatih/vim-go', {  'do': ':GoInstallBinaries' }
 Plug 'buoto/gotests-vim'
 Plug 'kevinw/pyflakes-vim', { 'for': 'python' }
@@ -66,9 +68,19 @@ set clipboard=unnamed
 " Enhance command-line completion
 set wildmenu
 
-" Allow cursor keys in insert mode
 if !has('nvim')
+    " Allow cursor keys in insert mode
     set esckeys
+
+    " Highlight yanked text
+    augroup LuaHighlight
+      autocmd!
+      autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
+    augroup END
+
+    " Live substitution
+    " not available until neovim v0.5
+    " set inccommand=split
 endif
 
 " Allow backspace in insert mode
@@ -430,12 +442,10 @@ let g:go_highlight_extra_types = 1
 nmap <leader>gt :GoAddTags<CR>  " Generate go stuct tags
 
 "
-" YouCompleteMe
+" CoC
 "
-let g:ycm_autoclose_preview_window_after_completion = 1
-"let g:ycm_min_num_of_chars_for_completion = 1
-
-" Override error highlighing color
-" Something above is setting ctermfg=white which is unreadable
-" This fixes it, but I should probably figure out what is setting it
-highlight SpellBad ctermbg=red ctermfg=black
+" Give more space for displaying messages.
+set cmdheight=2
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300

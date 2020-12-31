@@ -11,10 +11,6 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]] ; then
 
     vim +PlugClean +PlugUpdate +PlugInstall +qall
 
-    pecho "Installing YouCompleteMe...\n"
-    cd ~/.vim/plugged/YouCompleteMe
-    sudo $(which python3) ./install.py --all
-
     pecho "Creating vim undo directory...\n"
     mkdir -p ~/.vim/undo
 

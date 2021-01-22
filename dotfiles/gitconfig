@@ -8,6 +8,7 @@
 [github]
     user = ameliagapin
 
+
 ###############################################################################
 # All kinds of git goodness                                                   #
 ###############################################################################
@@ -112,7 +113,9 @@
 	precomposeunicode = false
 
     # use diff-so-fancy
-	pager = diff-so-fancy | less --tabs=4 -RFX
+    #pager = diff-so-fancy | less --tabs=4 -RFX
+    # Use delta
+    pager = delta
 
 [color]
 
@@ -170,29 +173,46 @@
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
 
+
+###############################################################################
+# Delta                                                                        #
+###############################################################################
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = line-numbers decorations
+    whitespace-error-style = 22 reverse
+    line-numbers = true
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+
+###############################################################################
 # URL shorthands
+###############################################################################
+
 
 [url "git@github.com:"]
-
 	insteadOf = "gh:"
 	pushInsteadOf = "github:"
 	pushInsteadOf = "git://github.com/"
 
 [url "git://github.com/"]
-
 	insteadOf = "github:"
 
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 
 [url "git@gist.github.com:"]
-
 	insteadOf = "gst:"
 	pushInsteadOf = "gist:"
 	pushInsteadOf = "git://gist.github.com/"
 
 [url "git://gist.github.com/"]
-
 	insteadOf = "gist:"
 
 [credential]
@@ -203,8 +223,10 @@
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
+
 [init]
 	defaultBranch = main
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

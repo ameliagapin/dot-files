@@ -30,7 +30,7 @@ alias vp="vagrant provision"
 alias vs="vagrant ssh"
 
 # git
-alias gdelmerged="git branch --merged | grep -v \* | grep -v '^\s*master$' | grep -v '^\s*develop$' | xargs -t -n 1 git branch -d"
+alias gdelmerged="git branch --merged | grep -v \* | grep -v '^\s*((main)|(master))$' | grep -v '^\s*develop$' | xargs -t -n 1 git branch -d"
 alias gp='git pull'
 alias gpr='git pull --rebase'
 alias gc="git checkout"

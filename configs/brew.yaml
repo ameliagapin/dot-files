@@ -118,6 +118,8 @@ packages:
     args:
   - name: hey
     args:
+  - name: git-delta
+    args:
 
 cask:
   - atom

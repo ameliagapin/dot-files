@@ -31,6 +31,8 @@ Plug 'luochen1990/rainbow'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary' " Provides easy commenting using gcc and gc
+Plug 'tpope/vim-abolish' " Better substitutions https://github.com/tpope/vim-abolish
+Plug 'godlygeek/tabular' " Align text in columns
 
 " Language support
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-json coc-tsserver coc-sh coc-go coc-html coc-python coc-sql coc-docker coc-phpls '}
@@ -320,6 +322,12 @@ com! RC e ~/.vimrc
 
 " :S to source ~/.vimrc
 com! S source ~/.vimrc
+
+" Show the highlight group for the symbol under the curser. Good for working
+" with updating colorthemes
+map <leader>hg :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " ----------------------------------------------------------------------
 " | Status Line                                                        |

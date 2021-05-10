@@ -38,6 +38,8 @@ Plug 'fatih/vim-go', {  'do': ':GoInstallBinaries' }
 Plug 'buoto/gotests-vim'
 Plug 'kevinw/pyflakes-vim', { 'for': 'python' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+
+Plug 'ameliagapin/palenight.vim'
 call plug#end()
 
 " Wait less between keypresses for combined mappings
@@ -55,8 +57,19 @@ filetype plugin on     " enables filetype specific plugins
 
 " Colorz
 set t_Co=256
+
+if (has("nvim"))
+"  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
+if (has("termguicolors"))
+  set termguicolors
+endif
 set background=dark
-colorscheme afterglow
+let g:lightline = { 'colorscheme': 'palenight' }
+let g:airline_theme = "palenight"
+colorscheme palenight
 
 " Make Vim more useful
 set nocompatible
@@ -146,6 +159,7 @@ set tabstop=4     " How much space Vim gives to a tab
 set smarttab      " Improves tabbing
 set shiftwidth=4  " Number of spaces when indenting
 set softtabstop=4 " Don't think I need this in combo with the other options
+set shiftround
 " Some filetypes only get two spaces
 autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab 
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
@@ -262,6 +276,10 @@ map <C-w> <C-w><C-w>
 noremap <C-j> :bnext<cr>
 noremap <C-k> :bprevious<cr>
 
+" Navigate quickfix
+noremap <leader>j :cnext<cr>
+noremap <leader>k :cprevious<cr>
+
 " Allow switching buffers without saving
 set hidden
 
@@ -313,30 +331,30 @@ com! S source ~/.vimrc
 "   2) cterm (color terminals, e.g.: MS-DOS console, color-xterm)
 "   3) gui   (GUIs)
 
-highlight ColorColumn
-    \ term=NONE
-    \ cterm=NONE  ctermbg=237    ctermfg=NONE
-    \ gui=NONE    guibg=#073642  guifg=NONE
+" highlight ColorColumn
+"     \ term=NONE
+"     \ cterm=NONE  ctermbg=237    ctermfg=NONE
+"     \ gui=NONE    guibg=#073642  guifg=NONE
 
-highlight CursorLine
-    \ term=NONE
-    \ cterm=NONE  ctermbg=235  ctermfg=NONE
-    \ gui=NONE    guibg=#073642  guifg=NONE
+" highlight CursorLine
+"     \ term=NONE
+"     \ cterm=NONE  ctermbg=235  ctermfg=NONE
+"     \ gui=NONE    guibg=#073642  guifg=NONE
 
-highlight CursorLineNr
-    \ term=bold
-    \ cterm=bold  ctermbg=NONE   ctermfg=178
-    \ gui=bold    guibg=#073642  guifg=Orange
+" highlight CursorLineNr
+"     \ term=bold
+"     \ cterm=bold  ctermbg=NONE   ctermfg=178
+"     \ gui=bold    guibg=#073642  guifg=Orange
 
-highlight LineNr
-    \ term=NONE
-    \ cterm=NONE  ctermfg=241    ctermbg=NONE
-    \ gui=NONE    guifg=#839497  guibg=#073642
+" highlight LineNr
+"     \ term=NONE
+"     \ cterm=NONE  ctermfg=241    ctermbg=NONE
+"     \ gui=NONE    guifg=#839497  guibg=#073642
 
-highlight User1
-    \ term=NONE
-    \ cterm=NONE  ctermbg=237    ctermfg=Grey
-    \ gui=NONE    guibg=#073642  guifg=#839496
+" highlight User1
+"     \ term=NONE
+"     \ cterm=NONE  ctermbg=237    ctermfg=Grey
+"     \ gui=NONE    guibg=#073642  guifg=#839496
 
 
 " ----------------------------------------------------------------------
@@ -439,6 +457,7 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 
 nmap <leader>gt :GoAddTags<CR>  " Generate go stuct tags
+nmap <leader>gr :GoRename<CR>   " Rename go variable
 
 "
 " CoC

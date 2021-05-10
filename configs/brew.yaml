@@ -120,6 +120,16 @@ packages:
     args:
   - name: git-delta
     args:
+  - name: qlstephen
+    args:
+  - name: quicklook-json
+    args:
+  - name: qlmarkdown
+    args:
+  - name: derailed/k9s/k9s
+    args:
+  - name: ctop
+    args:
 
 cask:
   - atom
